@@ -1,12 +1,28 @@
 import itertools
 import logging
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from pydantic.v1 import BaseModel, Field
+import json
 
-from .base import OutputMetric, extract_json_from_response, run_chatopenai
+from .base import OutputMetric, run_chatopenai
 
 LOGGER = logging.getLogger(__name__)
+
+
+def extract_json_from_response(response: str) -> Optional[Dict[str, Any]]:
+    json_start = response.find("{")
+    json_end = response.rfind("}") + 1
+    if json_start == -1 or json_end == -1:
+        return None
+
+    try:
+        return json.loads(response[json_start:json_end])
+    except json.JSONDecodeError:
+        LOGGER.warning(
+            f"Could not decode JSON from response: {response[json_start:json_end]}"
+        )
+        return None
 
 
 class CorpusQaRubricPropertyConfig(BaseModel):
@@ -34,8 +50,8 @@ class RubricCorpusQaGenericMetric(OutputMetric):
     def _score_length(self, response: str, low_length, high_length) -> float:
         word_count = len(response.split())
         return 1 - (
-            (max(min(high_length, word_count), low_length) - low_length)
-            / (high_length - low_length)
+                (max(min(high_length, word_count), low_length) - low_length)
+                / (high_length - low_length)
         )
 
     def _score_property(self, response: str, question: str, prop: str) -> float:
@@ -73,8 +89,8 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
 Response: {response}
 
 Split the response into individual claims, citations, and excerpts from the citations, in JSON format: """
-            '{"claims": [{"claim_text": "...", "citations": [{"citation_text": "...", "excerpts": ["...", ...]}, ...]}, ...]}'
-            "\n\nIf a claim is missing citations or a citation is not accompanied by excerpts, some lists may be empty in your output.",
+                        '{"claims": [{"claim_text": "...", "citations": [{"citation_text": "...", "excerpts": ["...", ...]}, ...]}, ...]}'
+                        "\n\nIf a claim is missing citations or a citation is not accompanied by excerpts, some lists may be empty in your output.",
             json_mode=True,
         )
 
