@@ -54,6 +54,8 @@ class LlmEval:
         test_cases = []
         seen_agreements = set()
         for conf in configs:
+            if conf["case_id"] not in responses:
+                continue
             conf["response"] = responses[conf["case_id"]]
             if conf["agreement"]:
                 if conf["initial_prompt"] in seen_agreements:
