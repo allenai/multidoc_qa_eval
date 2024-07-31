@@ -1,28 +1,13 @@
 import itertools
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from pydantic.v1 import BaseModel, Field
-import json
 
-from .base import OutputMetric, run_chatopenai
+from .base import OutputMetric
+from run_utils import run_chatopenai, extract_json_from_response
 
 LOGGER = logging.getLogger(__name__)
-
-
-def extract_json_from_response(response: str) -> Optional[Dict[str, Any]]:
-    json_start = response.find("{")
-    json_end = response.rfind("}") + 1
-    if json_start == -1 or json_end == -1:
-        return None
-
-    try:
-        return json.loads(response[json_start:json_end])
-    except json.JSONDecodeError:
-        LOGGER.warning(
-            f"Could not decode JSON from response: {response[json_start:json_end]}"
-        )
-        return None
 
 
 class CorpusQaRubricPropertyConfig(BaseModel):
