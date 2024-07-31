@@ -43,7 +43,7 @@ class LlmEval:
             for line in f:
                 qa = json.loads(line)
                 if src == "single":
-                    response = qa["sources"][0]["ans_text"]
+                    response = qa["sources"][0]["answer_txt"]
                 else:
                     for src_ans in qa["sources"]:
                         if src_ans["name"] == src:
@@ -61,7 +61,7 @@ class LlmEval:
                 seen_agreements.add(conf["initial_prompt"])
             test_cases.append(TestCase(**conf))
 
-        print(f"Created {len(responses)} tests for src: {src}...")
+        print(f"Created {len(test_cases)} tests for src: {src}...")
         return test_cases
 
 
