@@ -254,7 +254,7 @@ def main():
         "--json-meta",
         type=str,
         help="Metadata JSON file containing the questions, links and source answers",
-        default="qa_metadata_all.jsonl",
+        default="data/qa_metadata_all.jsonl",
     )
     args = parser.parse_args()
 
@@ -265,7 +265,7 @@ def main():
 
     qa_rev_idx = {qa_meta["question"].strip(): i for i, qa_meta in enumerate(qa_metadata)}
     agreement_qidx = [i for i in range(5)] + [i for i in range(25, 30, 1)]
-    creds = get_creds(SCOPES)
+    creds = get_credentials()
     drive_service = build("drive", "v3", credentials=creds)
     sheets_service = build("sheets", "v4", credentials=creds)
     docs_service = build("docs", "v1", credentials=creds)
@@ -316,7 +316,7 @@ def main():
                     }
                 )
 
-    with open("output.jsonl", "w") as f:
+    with open("data/output.jsonl", "w") as f:
         for entry in data:
             f.write(json.dumps(entry) + "\n")
 

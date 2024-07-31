@@ -2874,52 +2874,27 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin by introducing RRT-based path planning.",
-              "weight": 0.08
+              "weight": 0.13333333333333333
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide information on adapting RRT-based path planning to efficiently handle narrow pathways.",
-              "weight": 0.08
+              "weight": 0.13333333333333333
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide the challenges involved in using RRT-based path planning.",
-              "weight": 0.08
+              "weight": 0.13333333333333333
             },
             {
               "name": "most_important_item_3",
               "criterion": "The answer should briefly provide advantages of the RRT-based path planning.",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_4",
-              "criterion": "__",
-              "weight": 0.08
+              "weight": 0.13333333333333333
             },
             {
               "name": "nice_to_have_item_0",
               "criterion": "The answer should provide tradeoff between designing algorithms for narrow pathways and wide pathways in path planning.",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04
+              "weight": 0.06666666666666667
             }
           ]
         }
@@ -2946,62 +2921,37 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should start with briefly explaining visiotactile, piezoelectric, triboelectric tactile sensors.",
-              "weight": 0.06315789473684211
+              "weight": 0.08571428571428572
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should present advantages of visiotactile sensors for robots.",
-              "weight": 0.06315789473684211
+              "weight": 0.08571428571428572
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide disadvantages of visiotactile sensors for robots.",
-              "weight": 0.06315789473684211
+              "weight": 0.08571428571428572
             },
             {
               "name": "most_important_item_3",
               "criterion": "The asnwer should provid advantages of piezoelectric sensors in robots.",
-              "weight": 0.06315789473684211
+              "weight": 0.08571428571428572
             },
             {
               "name": "most_important_item_4",
               "criterion": "The answer should present the disadvantages associated with piezoelectric sensors in robots.",
-              "weight": 0.06315789473684211
+              "weight": 0.08571428571428572
             },
             {
               "name": "most_important_item_5",
               "criterion": "The asnwer should provid advantages of triboelectric tactile sensors in robots.",
-              "weight": 0.06315789473684211
+              "weight": 0.08571428571428572
             },
             {
               "name": "most_important_item_6",
               "criterion": "The answer should present the disadvantages associated with triboelectric tactile sensors in robots.",
-              "weight": 0.06315789473684211
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.031578947368421054
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.031578947368421054
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.031578947368421054
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.031578947368421054
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.031578947368421054
+              "weight": 0.08571428571428572
             }
           ]
         }
@@ -3275,67 +3225,52 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing background on SLAM models.",
-              "weight": 0.08
+              "weight": 0.09999999999999999
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide datasets used to evaluate SLAM methods",
-              "weight": 0.08
+              "weight": 0.09999999999999999
             },
             {
               "name": "nice_to_have_item_0",
               "criterion": "The answe should provide information of how the SLAM models are evaluated.",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             },
             {
               "name": "nice_to_have_item_1",
               "criterion": "(a) Reconstruction Error (RE) is the average error of world positions of 3D features on keyframes across entire global map;",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             },
             {
               "name": "nice_to_have_item_2",
               "criterion": "(b) Reconstruction Error Standard Deviation (RE_STD) is the average standard deviation of Reconstruction Error (RE) across entire global map;",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             },
             {
               "name": "nice_to_have_item_3",
               "criterion": "(c) Cruciality of Features (CF) measures percentage of features lie on static area of the surroundings;",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             },
             {
               "name": "nice_to_have_item_4",
               "criterion": "(d) Significance of Features (SF) measures how well features sampled by VSLAM describe general shape of the objects and structures in the surroundings.",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             },
             {
               "name": "nice_to_have_item_5",
               "criterion": "(e) Outlier Removal Capability (ORC) measures VSLAM\u2019s capability to remove outliers sampled from moving objects.\u201d",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             },
             {
               "name": "nice_to_have_item_6",
               "criterion": "https://www.sciencedirect.com/science/article/pii/S0921889019301009",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             },
             {
               "name": "nice_to_have_item_7",
               "criterion": "The answer should provide selection criteria of the datasets.",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_8",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_9",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_10",
-              "criterion": "__",
-              "weight": 0.04
+              "weight": 0.049999999999999996
             }
           ]
         }
@@ -3362,52 +3297,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with expaining the k-node subgraphs.",
-              "weight": 0.08
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "Answer should provide properties of k-node subgraphs that can be counted in faster than cubic time in the size of the input graph.",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_2",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_3",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_4",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04
+              "weight": 0.3
             }
           ]
         }
@@ -3434,42 +3329,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing insights into countig the number of subgraphs in a graph.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide applications counting the number of subgraphs in a graph that have certain properties.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer shoould provide challenges involved in counting the subgraphs.",
-              "weight": 0.10909090909090909
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.05454545454545454
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -3496,32 +3366,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with introducing distributed cognition.",
-              "weight": 0.15
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide theories of distributed cognition informed the design of features in social computing systems",
-              "weight": 0.15
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.075
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.075
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.075
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.075
+              "weight": 0.3
             }
           ]
         }
@@ -3627,37 +3477,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with defining the observational study.",
-              "weight": 0.13333333333333333
+              "weight": 0.24
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the list of papers with contribution of each along with reference which conduct observational study as the formative study in systems instead of just interviews.",
-              "weight": 0.13333333333333333
+              "weight": 0.24
             },
             {
               "name": "nice_to_have_item_0",
               "criterion": "The answer should discuss the benefits of observational study with others.",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.06666666666666667
+              "weight": 0.12
             }
           ]
         }
@@ -3783,52 +3613,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should highlight the importance of theoretical lens for qualitative research concerning robotics process automation (RPA) implementations",
-              "weight": 0.08
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide information on the theoretical frameworks used for qualitative research concerning robotics process automation (RPA) implementations",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_2",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_3",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_4",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04
+              "weight": 0.3
             }
           ]
         }
@@ -4065,42 +3855,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing the importance of robustness and safety of quadrotor UAVs.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the solutions to improve robustness and safety of quadrotor UAVs in extreme weather conditions",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide limitations associated with designing the robust and safe solutions for quadrotor UAVs considering extreme weather conditions.",
-              "weight": 0.10909090909090909
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.05454545454545454
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -4164,37 +3929,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with introducing MTurk.",
-              "weight": 0.13333333333333333
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide theories from psychology which are testable on a platform like mturk but haven't yet been studied in the HCI literature",
-              "weight": 0.13333333333333333
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.06666666666666667
+              "weight": 0.3
             }
           ]
         }
@@ -4221,42 +3961,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with introducing differential privacy systems.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the performance metrics which are typically used for evaluating differential privacy systems.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide the importance of using these performance metrics for evaluating differential privacy systems.",
-              "weight": 0.10909090909090909
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.05454545454545454
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -4283,27 +3998,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should provide a background on mixed methodology research study.",
-              "weight": 0.15
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the analysis tools which are accurate for an appraisal of mixed methodology research study.",
-              "weight": 0.15
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide limitations and challenges in data analysis tool used for an appraisal of a mixed methodology research study.",
-              "weight": 0.15
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.075
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.075
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -4377,22 +4082,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing a background on ontology semantic similarity.",
-              "weight": 0.17142857142857143
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide information on good Ontology semantic similarity measure that considers multiple inheritance cases of concepts",
-              "weight": 0.17142857142857143
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide the challenges in multiple inheritance.",
-              "weight": 0.17142857142857143
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.08571428571428572
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -4461,17 +4161,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should provide the methods to extract user intents when an automation encounters ambiguity, especially in failure cases.",
-              "weight": 0.24
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide limitations of some of the techniques.",
-              "weight": 0.24
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.12
+              "weight": 0.3
             }
           ]
         }
@@ -4498,17 +4193,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing challenges associated with person-following robots.",
-              "weight": 0.24
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the techniques used for person-following robot navigation which track the person and re-identify if occluded.",
-              "weight": 0.24
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.12
+              "weight": 0.3
             }
           ]
         }
@@ -4535,47 +4225,22 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should introduce non-linear and non-stationary signals.",
-              "weight": 0.0923076923076923
+              "weight": 0.15
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide techniques in non-linear, non-stationary signal processing.",
-              "weight": 0.0923076923076923
+              "weight": 0.15
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide techniques in non-stationary signal processing.",
-              "weight": 0.0923076923076923
+              "weight": 0.15
             },
             {
               "name": "most_important_item_3",
               "criterion": "The answer should justify which among non-linear and non-stationary is more effective in view of Geophysical signals.",
-              "weight": 0.0923076923076923
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04615384615384615
+              "weight": 0.15
             }
           ]
         }
@@ -4602,37 +4267,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing a short note on dexterous, in-hand robotic manipulation.",
-              "weight": 0.13333333333333333
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer sould present the most important practical applications of dextrous, in-hand robotic manipulation.",
-              "weight": 0.13333333333333333
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.06666666666666667
+              "weight": 0.3
             }
           ]
         }
@@ -4659,42 +4299,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should provide the role of interfaces to optlmize LLMs.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the interfaces developed by researchers for helping people optimize LLMS for a task.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide the biggest remaining user problems to optimize LLMs for a task.",
-              "weight": 0.10909090909090909
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.05454545454545454
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -4763,32 +4378,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The anser should begin with introducing just-in-time interventions.",
-              "weight": 0.13333333333333333
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide information on principles for designing just-in-time interventions in a programming scenario.",
-              "weight": 0.13333333333333333
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide challenges involved in designing just-in-time interventions in a programming scenario.",
-              "weight": 0.13333333333333333
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.06666666666666667
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -4815,52 +4415,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with introducing Federated Learning.",
-              "weight": 0.08
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide most important open challenges in Federated Learning.",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_2",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_3",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_4",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04
+              "weight": 0.3
             }
           ]
         }
@@ -4887,37 +4447,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing the importance of the quality of human robot communication.",
-              "weight": 0.13333333333333333
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the metrics to mesures the quality of human robot communication.",
-              "weight": 0.13333333333333333
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.06666666666666667
+              "weight": 0.3
             }
           ]
         }
@@ -4944,37 +4479,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing the reason behind setting the lower bound of sampling period while designing Kalman filter.",
-              "weight": 0.13333333333333333
+              "weight": 0.24
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the optimum value between the upper and lower bounds for the sampling period while designing Kalman filter.",
-              "weight": 0.13333333333333333
+              "weight": 0.24
             },
             {
               "name": "nice_to_have_item_0",
               "criterion": "The answer should provide the upper bound in Kalman filter designing compared to the Shennon-Nyquist theorem.",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.06666666666666667
+              "weight": 0.12
             }
           ]
         }
@@ -5001,47 +4516,22 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing background on type inference in pyhton.",
-              "weight": 0.0923076923076923
+              "weight": 0.15
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide publicly available datasets that are typically used for evaluating type inference systems in python.",
-              "weight": 0.0923076923076923
+              "weight": 0.15
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide challenges in evaluating type inference systems in python.",
-              "weight": 0.0923076923076923
+              "weight": 0.15
             },
             {
               "name": "most_important_item_3",
               "criterion": "The answer should provide the tools used for type inference in python.",
-              "weight": 0.0923076923076923
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04615384615384615
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04615384615384615
+              "weight": 0.15
             }
           ]
         }
@@ -5184,37 +4674,12 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing a background on terrain traversibility in robotics.",
-              "weight": 0.13333333333333333
+              "weight": 0.3
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide leading methods for learning terrain traversibility costs automatically from robot experience.",
-              "weight": 0.13333333333333333
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.06666666666666667
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.06666666666666667
+              "weight": 0.3
             }
           ]
         }
@@ -5325,42 +4790,17 @@
             {
               "name": "most_important_item_0",
               "criterion": "The answer should begin with providing the leading approaches used in scientific paper review generation.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_1",
               "criterion": "The answer should provide the strengths of leading approaches to automatic scientific paper review generation.",
-              "weight": 0.10909090909090909
+              "weight": 0.19999999999999998
             },
             {
               "name": "most_important_item_2",
               "criterion": "The answer should provide the weaknesses of leading approaches to automatic scientific paper review generation.",
-              "weight": 0.10909090909090909
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.05454545454545454
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.05454545454545454
+              "weight": 0.19999999999999998
             }
           ]
         }
@@ -5383,58 +4823,7 @@
           "expertise_weight": 0.05,
           "citations_weight": 0.2,
           "excerpts_weight": 0.1,
-          "other_properties": [
-            {
-              "name": "most_important_item_0",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_1",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_2",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_3",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_4",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04
-            }
-          ]
+          "other_properties": []
         }
       }
     ],
@@ -5455,58 +4844,7 @@
           "expertise_weight": 0.05,
           "citations_weight": 0.2,
           "excerpts_weight": 0.1,
-          "other_properties": [
-            {
-              "name": "most_important_item_0",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_1",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_2",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_3",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "most_important_item_4",
-              "criterion": "__",
-              "weight": 0.08
-            },
-            {
-              "name": "nice_to_have_item_0",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_1",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_2",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_3",
-              "criterion": "__",
-              "weight": 0.04
-            },
-            {
-              "name": "nice_to_have_item_4",
-              "criterion": "__",
-              "weight": 0.04
-            }
-          ]
+          "other_properties": []
         }
       }
     ],

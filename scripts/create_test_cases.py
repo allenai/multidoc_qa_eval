@@ -3,7 +3,7 @@ import json
 from tqdm import tqdm
 
 annotations = []
-with open("output.jsonl", "r") as f:
+with open("data/output.jsonl", "r") as f:
     for line in f:
         annotations.append(json.loads(line))
 
@@ -59,5 +59,5 @@ for d in tqdm(annotations):
     qn["rubric_english"] = d["agreement"]
     test_cases.append(qn)
 
-with open("test_configs.json", "w") as f:
+with open("data/test_configs.json", "w") as f:
     json.dump(test_cases, f, indent=2)
