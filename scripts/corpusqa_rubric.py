@@ -4,7 +4,6 @@ from typing import Any, Dict, List
 
 from pydantic.v1 import BaseModel, Field
 
-from .base import OutputMetric
 from run_utils import run_chatopenai, extract_json_from_response
 
 LOGGER = logging.getLogger(__name__)
@@ -28,7 +27,7 @@ class CorpusQaRubricConfig(BaseModel):
     model_name: str = "gpt-4-turbo-2024-04-09"
 
 
-class RubricCorpusQaGenericMetric(OutputMetric):
+class RubricCorpusQaGenericMetric:
     def __init__(self, config: Dict[str, Any]):
         self.config = CorpusQaRubricConfig.parse_obj(config)
 
