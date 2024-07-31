@@ -1,6 +1,8 @@
 import argparse
 import json
 import logging
+import statistics
+from datetime import datetime
 from typing import Any, Dict, List
 
 from corpusqa_rubric import RubricCorpusQaGenericMetric
@@ -85,6 +87,12 @@ def main():
         help="Json file containing rubrics for all the questions to be evaluated",
     )
     parser.add_argument(
+        "--output",
+        type=str,
+        default=f"results_{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json",
+        help="output file to store the results of the evaluation",
+    )
+    parser.add_argument(
         "--agreement",
         action="store_true",
         help="Calculate agreement between annotators",
@@ -120,6 +128,14 @@ def main():
             for test_case in tqdm(test_cases):
                 results[src].append(test_case.run())
             print(f"Results for {src} source: {results[src]}")
+
+        with open(args.output, "w") as f:
+            json.dump(results, f)
+            print(f"Results written to {args.output}")
+
+        print(
+            f'Final results: {statistics.mean([res["score"] for res in results["single"]])}'
+        )
 
 
 if __name__ == "__main__":
