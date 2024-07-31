@@ -1,0 +1,10 @@
+requests==2.31.0
+requests-oauthlib==2.0.0
+tqdm==4.66.4
+google-api-core==2.19.0
+google-api-python-client==2.133.0
+google-auth==2.30.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.0
+googleapis-common-protos==1.63.1
+
