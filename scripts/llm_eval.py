@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import statistics
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from typing import Any, Dict, List
 
@@ -89,7 +90,7 @@ def main():
     parser.add_argument(
         "--output",
         type=str,
-        default=f"results_{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json",
+        default=f"./data/results_{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json",
         help="output file to store the results of the evaluation",
     )
     parser.add_argument(
@@ -125,8 +126,15 @@ def main():
             test_cases = llm_eval.make_test_cases(src)
             results[src] = []
             print(f"Running test cases for src: {src}...")
-            for test_case in tqdm(test_cases):
-                results[src].append(test_case.run())
+            with ThreadPoolExecutor(max_workers=32) as executor:
+                future_to_test_case = {
+                    executor.submit(test_case.run): test_case
+                    for test_case in test_cases
+                }
+                for future in tqdm(
+                    as_completed(future_to_test_case), total=len(test_cases)
+                ):
+                    results[src].append(future.result())
             print(f"Results for {src} source: {results[src]}")
 
         with open(args.output, "w") as f:
