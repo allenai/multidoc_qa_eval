@@ -6,7 +6,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from typing import Any, Dict, List
 
+import litellm
 from corpusqa_rubric import RubricCorpusQaGenericMetric
+from litellm.caching import Cache
 from pydantic.v1 import BaseModel, Field
 from tqdm import tqdm
 
@@ -108,6 +110,8 @@ def main():
     )
 
     args = parser.parse_args()
+
+    litellm.cache = Cache(type="disk", disk_cache_dir="./data/litellm_cache/")
 
     if not args.agreement:
         srcs = args.src_names.split(",") if args.src_names else []

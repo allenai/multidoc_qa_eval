@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Any, Dict, Optional
 
-from langchain_openai import ChatOpenAI
+import litellm
 
 LOGGER = logging.getLogger(__name__)
 
@@ -30,23 +30,20 @@ def run_chatopenai(
     **chat_kwargs,
 ) -> str:
     chat_kwargs["temperature"] = chat_kwargs.get("temperature", 0)
-    llm = ChatOpenAI(
+    if json_mode:
+        chat_kwargs["response_format"] = {"type": "json_object"}
+    msgs = (
+        [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+        if system_prompt is not None
+        else [{"role": "user", "content": user_prompt}]
+    )
+    resp = litellm.completion(
         model=model_name,
-        model_kwargs=(
-            ({"response_format": {"type": "json_object"}}) if json_mode else dict()
-        ),
+        messages=msgs,
         **chat_kwargs,
     )
 
-    msgs = (
-        [("system", system_prompt), ("human", user_prompt)]
-        if system_prompt is not None
-        else [("human", user_prompt)]
-    )
-
-    resp = llm.invoke(msgs).content
-
-    # Langchain APIs are weird and technically don't promise to return a string
-    assert isinstance(resp, str)
-
-    return resp
+    return resp.choices[0].message.content
