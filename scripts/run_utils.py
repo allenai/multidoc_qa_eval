@@ -1,6 +1,7 @@
 import json
-from typing import Optional, Dict, Any
 import logging
+from typing import Any, Dict, Optional
+
 from langchain_openai import ChatOpenAI
 
 LOGGER = logging.getLogger(__name__)
@@ -22,11 +23,11 @@ def extract_json_from_response(response: str) -> Optional[Dict[str, Any]]:
 
 
 def run_chatopenai(
-        model_name: str,
-        system_prompt: Optional[str],
-        user_prompt: str,
-        json_mode: bool = False,
-        **chat_kwargs,
+    model_name: str,
+    system_prompt: Optional[str],
+    user_prompt: str,
+    json_mode: bool = False,
+    **chat_kwargs,
 ) -> str:
     chat_kwargs["temperature"] = chat_kwargs.get("temperature", 0)
     llm = ChatOpenAI(

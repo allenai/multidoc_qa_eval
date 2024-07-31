@@ -1,9 +1,10 @@
 import argparse
 import json
-from typing import Optional, Dict, Any, List
-from pydantic.v1 import BaseModel, Field
-from corpusqa_rubric import RubricCorpusQaGenericMetric
 import logging
+from typing import Any, Dict, List
+
+from corpusqa_rubric import RubricCorpusQaGenericMetric
+from pydantic.v1 import BaseModel, Field
 from tqdm import tqdm
 
 LOGGER = logging.getLogger(__name__)
@@ -12,7 +13,9 @@ LOGGER = logging.getLogger(__name__)
 class TestCase(BaseModel):
     case_id: str = Field(description="The ID of the case.")
     annotator: str = Field(description="Annotator id for the question.")
-    agreement: bool = Field(description="Indicator whether the question is annotated by multiple annotators.")
+    agreement: bool = Field(
+        description="Indicator whether the question is annotated by multiple annotators."
+    )
 
     initial_prompt: str = Field(
         description="The initial query from the user to the system."
@@ -83,7 +86,7 @@ def main():
     )
     parser.add_argument(
         "--agreement",
-        action='store_true',
+        action="store_true",
         help="Calculate agreement between annotators",
         default=False,
     )
@@ -92,7 +95,7 @@ def main():
         "--src-names",
         type=str,
         help="names of the sources to evaluate (comma separated)",
-        default=None
+        default=None,
     )
 
     args = parser.parse_args()
