@@ -12,7 +12,7 @@ test_cases = []
 for d in tqdm(annotations):
     qn = {
         'initial_prompt': d['question'],
-        'metric_config': [
+        'metric_config':
             {
                 "name": "rubric_corpusqa_generic",
                 "config": {
@@ -25,8 +25,7 @@ for d in tqdm(annotations):
                     "excerpts_weight": 0.1,
                     "other_properties": [],
                 }
-            }
-        ],
+            },
         'case_id': hashlib.md5(str((d['question'], d['spreadsheet']['id'])).encode('utf-8')).digest().hex(),
     }
 
@@ -40,17 +39,17 @@ for d in tqdm(annotations):
         print(d['spreadsheet'], d['ingredients_doc_link'])
         niceimp_weight = 0.6 / len(d['ingredients']['nice_to_have'])
     else:
-        raise ValueError("No rubric items")
+        print("No rubric items")
 
     for item_idx, item in enumerate(d['ingredients']['most_important']):
-        qn['metric_config'][0]['config']['other_properties'].append({
+        qn['metric_config']['config']['other_properties'].append({
             "name": f"most_important_item_{item_idx}",
             "criterion": item,
             "weight": mostimp_weight,
         })
 
     for item_idx, item in enumerate(d['ingredients']['nice_to_have']):
-        qn['metric_config'][0]['config']['other_properties'].append({
+        qn['metric_config']['config']['other_properties'].append({
             "name": f"nice_to_have_item_{item_idx}",
             "criterion": item,
             "weight": niceimp_weight,

@@ -4,6 +4,7 @@ from typing import Optional, Dict, Any, List
 from pydantic.v1 import BaseModel, Field
 from corpusqa_rubric import RubricCorpusQaGenericMetric
 import logging
+from tqdm import tqdm
 
 LOGGER = logging.getLogger(__name__)
 
@@ -16,13 +17,14 @@ class TestCase(BaseModel):
     initial_prompt: str = Field(
         description="The initial query from the user to the system."
     )
-    metric: RubricCorpusQaGenericMetric = Field(
+    metric_config: Dict[str, Any] = Field(
         description="The metric to use to score the response."
     )
     response: str = Field(description="The response from the system.")
 
     def run(self) -> Dict[str, Any]:
-        return self.metric.score_output(self.response)
+        metric = RubricCorpusQaGenericMetric(self.metric_config["config"])
+        return metric.score_output(self.response)
 
 
 class LlmEval:
@@ -35,30 +37,38 @@ class LlmEval:
             configs = json.load(f)
 
         responses = dict()
+
+        print("Reading responses...")
         with open(self.qa_file) as f:
             for line in f:
                 qa = json.loads(line)
-                if not src:
+                if src == "single":
                     response = qa["sources"][0]["ans_text"]
                 else:
                     for src_ans in qa["sources"]:
-                        if src_ans["source"] == src:
-                            response = src_ans["ans_text"]
+                        if src_ans["name"] == src:
+                            response = src_ans["answer_txt"]
                             break
                 responses[qa["case_id"]] = response
+        print(f"{len(responses)} responses obtained for eval...")
         test_cases = []
+        seen_agreements = set()
         for conf in configs:
             conf["response"] = responses[conf["case_id"]]
-            conf["metric"] = RubricCorpusQaGenericMetric(**conf["metric_config"])
-            del conf["metric_config"]
+            if conf["agreement"]:
+                if conf["initial_prompt"] in seen_agreements:
+                    continue
+                seen_agreements.add(conf["initial_prompt"])
             test_cases.append(TestCase(**conf))
+
+        print(f"Created {len(responses)} tests for src: {src}...")
         return test_cases
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--qa_file",
+        "--qa-file",
         type=str,
         required=True,
         help="Jsonl file containing queries and responses from system(s) to be evaluated",
@@ -71,13 +81,13 @@ def main():
     )
     parser.add_argument(
         "--agreement",
-        type=bool,
+        action='store_true',
         help="Calculate agreement between annotators",
         default=False,
     )
 
     parser.add_argument(
-        "--src_names",
+        "--src-names",
         type=str,
         help="names of the sources to evaluate (comma separated)",
         default=None
@@ -93,16 +103,18 @@ def main():
             llm_evals["single"] = llm_eval
         else:
             for src in srcs:
-                llm_eval = LlmEval(args.rubrics, args.qa_file, src)
+                llm_eval = LlmEval(args.rubrics, args.qa_file)
                 llm_evals[src] = llm_eval
 
         results = dict()
         for src, llm_eval in llm_evals.items():
-            test_cases = llm_eval.make_test_cases()
+            print(f"Creating test cases for src: {src}...")
+            test_cases = llm_eval.make_test_cases(src)
             results[src] = []
-            for test_case in test_cases:
+            print(f"Running test cases for src: {src}...")
+            for test_case in tqdm(test_cases):
                 results[src].append(test_case.run())
-            LOGGER.info(f"Results for {src} source: {results[src]}")
+            print(f"Results for {src} source: {results[src]}")
 
 
 if __name__ == "__main__":
