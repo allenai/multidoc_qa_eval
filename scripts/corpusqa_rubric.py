@@ -17,8 +17,6 @@ class CorpusQaRubricPropertyConfig(BaseModel):
 
 class CorpusQaRubricConfig(BaseModel):
     question: str
-    annotator: str
-    agreement: bool
     low_length: int = 300
     high_length: int = 600
     length_weight: float = 0.05
