@@ -39,7 +39,7 @@ for d in tqdm(annotations):
         print(d['spreadsheet'], d['ingredients_doc_link'])
         niceimp_weight = 0.6 / len(d['ingredients']['nice_to_have'])
     else:
-        print("No rubric items")
+        raise ValueError("No rubric items")
 
     for item_idx, item in enumerate(d['ingredients']['most_important']):
         qn['metric_config']['config']['other_properties'].append({

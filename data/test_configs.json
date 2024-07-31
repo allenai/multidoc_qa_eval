@@ -4606,7 +4606,23 @@
         "expertise_weight": 0.05,
         "citations_weight": 0.2,
         "excerpts_weight": 0.1,
-        "other_properties": []
+        "other_properties": [
+          {
+            "name": "most_important_item_0",
+            "criterion": "The answer should begin with providing a background on active learning.",
+            "weight": 0.19999999999999998
+          },
+          {
+            "name": "most_important_item_1",
+            "criterion": "The answer should provide the benefits of active learning when fine-tuning large language models.",
+            "weight": 0.19999999999999998
+          },
+          {
+            "name": "most_important_item_2",
+            "criterion": "The answer should provide challenges associated with active learning in LLMs",
+            "weight": 0.19999999999999998
+          }
+        ]
       }
     },
     "case_id": "983e73defc06e6794a856330905dc787",
@@ -4625,7 +4641,18 @@
         "expertise_weight": 0.05,
         "citations_weight": 0.2,
         "excerpts_weight": 0.1,
-        "other_properties": []
+        "other_properties": [
+          {
+            "name": "most_important_item_0",
+            "criterion": "The answer should begin with limitations of the fine-tuning of LLMs.",
+            "weight": 0.3
+          },
+          {
+            "name": "most_important_item_1",
+            "criterion": "The answer should provide the tasks where fine tuning smaller models is beneficial over using LLMs.",
+            "weight": 0.3
+          }
+        ]
       }
     },
     "case_id": "a5d23eb3a2555db0a82f6b64fed85baa",
