@@ -43,8 +43,8 @@
       }
     ],
     "case_id": "d44280651a6fb71d56ee96834e180fa6",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What are leading methods for generating hard examples of the boolean satisfiability problem, and what are their strengths and weaknesses?",
@@ -85,8 +85,8 @@
       }
     ],
     "case_id": "42f2553e73b1dc84669baf830c3eb140",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What is unique k-sat and what theoretical results are known about it?",
@@ -132,8 +132,8 @@
       }
     ],
     "case_id": "913bc2f74263079777db4b94a22d7f5a",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "In recommendation systems, how are new methods that optimize diversity typically evaluated?",
@@ -189,8 +189,8 @@
       }
     ],
     "case_id": "1f2a54322f88581b47108f363b961d22",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "In robotics, what are the leading methods for learning terrain traversibility costs automatically from robot experience?",
@@ -246,8 +246,8 @@
       }
     ],
     "case_id": "018bff91263ab3be5f8ad5bade76b030",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "what are the most important open challenges in using neural networks in combination with PDE solvers for fluid simulation?",
@@ -288,8 +288,8 @@
       }
     ],
     "case_id": "bb7198e650267504d67b14b6e4c67c7c",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What data preprocessing steps are most important for point cloud datasets before performing surface reconstruction?",
@@ -330,8 +330,8 @@
       }
     ],
     "case_id": "11e71107ddfdc824b8b87d4f5a2ef843",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are advantages and disadvantages of top methods for picking the right number of topics in topic modeling?",
@@ -377,8 +377,8 @@
       }
     ],
     "case_id": "ce433b751f38f7d0173095c2faa2f75a",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What is the known evidence for pervasiveness of gaming of citation metrics like citation count and h-index?",
@@ -434,8 +434,8 @@
       }
     ],
     "case_id": "08a151282687d2f0cd4f3d2c9c13d67d",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How have open-source publishing platforms impacted the global distribution of academic publishing?",
@@ -471,8 +471,8 @@
       }
     ],
     "case_id": "2a84ae2f6196e574f7b9a9121187a37b",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How do large language models like ChatGPT impact the diversity of published scientific ideas?",
@@ -518,8 +518,8 @@
       }
     ],
     "case_id": "ab3651c422a54f40aa4bac3fa630c13e",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are good practices for detecting AI-generated texts in situations where false positives are extremely expensive?",
@@ -565,8 +565,8 @@
       }
     ],
     "case_id": "6f526f72804ce3eb59feb7046f319ccc",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How does in-context learning for LLMs differ from traditional machine learning model training?",
@@ -612,8 +612,8 @@
       }
     ],
     "case_id": "803bc7891917f823a52948ebee89cf9d",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Describe what is known about overfitting in in-context learning.",
@@ -649,8 +649,8 @@
       }
     ],
     "case_id": "928646729f5d824dd9a52e9ddff70e58",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How good are LLMs at solving traditional tabular ML datasets using ICL?",
@@ -691,8 +691,8 @@
       }
     ],
     "case_id": "1f384c4d3942c46b676b5bfc66447192",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What insights can be obtained about developer behavior from their GitHub commits and pull requests?",
@@ -743,8 +743,8 @@
       }
     ],
     "case_id": "456d3c2c757f4b874abddb18a62f2ff8",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the best practices to protect a software against vulnerabilities from third party libraries?",
@@ -780,8 +780,8 @@
       }
     ],
     "case_id": "36d9a01cd11997e14deb22537f52f266",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How do external events influence software projects? Explain with a few recent examples.",
@@ -817,8 +817,8 @@
       }
     ],
     "case_id": "9b4f043c1561f830b2033f51ca87a648",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What kinds of tools and data sources are availabe to serve the information needs of developers when responding to critical vulnerabilities?",
@@ -864,8 +864,8 @@
       }
     ],
     "case_id": "f4cdd43e14e8ede7bb1a2b7776ff5a58",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Apart from preventing overfitting, are there any side effects (desirable or otherwise) of applying dropout in deep neural networks?",
@@ -911,8 +911,8 @@
       }
     ],
     "case_id": "baee287ff68f0fd60dcbd0d8b9b741b8",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the advantages and limitations of applying bias mitigation algorithms during pre-processing, training and inference stages of a model?",
@@ -958,8 +958,8 @@
       }
     ],
     "case_id": "0348920a58979e759af9081a6225ee0d",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How do different fairness metrics correlate with each other across various datasets and model architectures?",
@@ -1005,8 +1005,8 @@
       }
     ],
     "case_id": "323e85c9052082358fc0c045fe20a537",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How does doping impact integrated circuit design?",
@@ -1042,8 +1042,8 @@
       }
     ],
     "case_id": "46eecf06447c43657abf042004cdc115",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What sampling techniques are used for yield estimation in automated electronic circuit design?",
@@ -1099,8 +1099,8 @@
       }
     ],
     "case_id": "b73090602419bdedaebd2a9d40e5a199",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Compare the various algorithms for compressing trees in terms of computation complexity.",
@@ -1161,8 +1161,8 @@
       }
     ],
     "case_id": "2345ff0aa0b13fc87a46d5528be46060",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Suggest some ways in which precise positioning and context-aware networking can be achieved in 6G mobile communication?",
@@ -1213,8 +1213,8 @@
       }
     ],
     "case_id": "f0e4b81f93c36652a08a8160e12c9922",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Have large langauge models been applied to the schema matching problem in databases and are they effective?",
@@ -1270,8 +1270,8 @@
       }
     ],
     "case_id": "0919a8528cd20166163de3fdcb089efa",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are leading approaches for evaluating complex scientific question answering systems in NLP?",
@@ -1322,8 +1322,8 @@
       }
     ],
     "case_id": "948b6cb986a5d7732722975dbed9d420",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "For different modulation types like MPSK, QPSK, and MQAM, I'm measuring the error rate but want to understand and measure the Error Vector Magnitude (EVM) more accurately. I'm using a general equation for all modulation types. Is this the right approach, and what should I expect from the EVM vs. Eb/No curve?",
@@ -1384,8 +1384,8 @@
       }
     ],
     "case_id": "dc761baf0fc9fead9889d9eb0a258f0e",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What is the difference between FMRI datasets and MRI datasets in terms of data analysis?",
@@ -1431,8 +1431,8 @@
       }
     ],
     "case_id": "5e6e212dc63d2064ba909a08576cb3ec",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How effective are language models at automatically generating textual descriptions of scientific concepts?",
@@ -1488,8 +1488,8 @@
       }
     ],
     "case_id": "15dec998cf77887f870ebf9a55bb7e89",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How are user demonstrations represented in domain-specific-language programs and used for automation tasks?",
@@ -1545,8 +1545,8 @@
       }
     ],
     "case_id": "3d1ff2a80239a37908a6f4c4abc04486",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How can I use an hybridization of ontology and machine learning for text summarization ?",
@@ -1597,8 +1597,8 @@
       }
     ],
     "case_id": "00bdd80debc8549198001289188c6bea",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What data link layer problems can cause to termination of a connection?",
@@ -1639,8 +1639,8 @@
       }
     ],
     "case_id": "dda770e4b5c6b0933de17c4ba3aa3a39",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the leading approaches for anomoly detection in process mining?",
@@ -1701,8 +1701,8 @@
       }
     ],
     "case_id": "be5c0337461175e55f2a8fa9bcce5732",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Global Navigation Satellite Systems (GNSS) receivers can provide a reference clock signal known as Pulse-per-Second (PPS or 1-PPS). Is the PPS physically generated through a digitally-controlled oscillator (or line driver) whose offset is periodically re-initialized by the estimated clock bias (retrieved by means of PVT algorithms)?",
@@ -1758,8 +1758,8 @@
       }
     ],
     "case_id": "e2491bb6e4147c18762e7fb25d0bf1fd",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "I want to measure the distance between two Bluetooth devices (A Master and a slave) using the corresponding RSSI value. Is there any algorithm or popular approach that maps RSSI values directly to distance?",
@@ -1820,8 +1820,8 @@
       }
     ],
     "case_id": "5079291508735025cf2643c7a59d0293",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Have specialized approaches been developed for providing LLM assistance when people author SQL queries?",
@@ -1882,8 +1882,8 @@
       }
     ],
     "case_id": "2bb40aa93ac3a6a673c839bd660718ac",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How can the integration of GIS spatial analysis techniques with economic modeling improve the accuracy and effectiveness of environmental policy ?",
@@ -1919,8 +1919,8 @@
       }
     ],
     "case_id": "99fd4c1b54e1367bcd3cb3b243c2cc19",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How has the citation graph been used to improve neural language models for scientific papers?",
@@ -1961,8 +1961,8 @@
       }
     ],
     "case_id": "2dc0ff181a621680dde0a48e0d63f0d9",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are some common UI designs for sense-making, information organization, and AI writing tools?",
@@ -2003,8 +2003,8 @@
       }
     ],
     "case_id": "a8ba07610b6d77890e50144bfd4d4168",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "In auditory speech perception using iEEG, I will use Temporal Response Function (TRF) to determine correlations between stimulus characteristics (variations in the acoustic signal envelope, for example) and characteristics of recorded neuronal activity. I would like to fully understand the different stages of data processing carried out, as well as the reasoning and hypotheses behind them.",
@@ -2040,8 +2040,8 @@
       }
     ],
     "case_id": "8f5a6ec4ad13c0b7881a9af2de00ca4a",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Which frequency characteristics of seismic P-wave can be used to distinguish it from other waves?",
@@ -2087,8 +2087,8 @@
       }
     ],
     "case_id": "a2a5c8079442e178f078869471697f48",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What interfaces have researchers developed to help people perform behavioral evaluation of ML models, and how do they accelerate annotation efforts?",
@@ -2124,8 +2124,8 @@
       }
     ],
     "case_id": "5acd0e1d36af3c52c3159b4b230bcc2f",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What kinds of coverage motion planning algorithms are effective for floor-cleaning robots?",
@@ -2171,8 +2171,8 @@
       }
     ],
     "case_id": "e7bef53d393712d4b1010a62ee647fb2",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What data structures are commonly used to solve the Range Minimum Query (RMQ) problem?",
@@ -2213,8 +2213,8 @@
       }
     ],
     "case_id": "ac5f9fc3ee1bd86b2ec1dd35436ca7db",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What datasets and methods are used to pre-train models on table specific tasks?",
@@ -2255,8 +2255,8 @@
       }
     ],
     "case_id": "4534bd4b99ea2bfd1efd8c656e9264c7",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What are the main challenges in adapting transformer-based models for tabular data representation?",
@@ -2302,8 +2302,8 @@
       }
     ],
     "case_id": "e894bc20daf0522da9c576ae27b257de",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "what are leading techniques for safe navigation in partially observable environments with moving obstacles?",
@@ -2354,8 +2354,8 @@
       }
     ],
     "case_id": "e551f57061ffdacce638393c2984010b",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "how can RRT-based path planning be adapted to efficiently handle narrow pathways",
@@ -2406,8 +2406,8 @@
       }
     ],
     "case_id": "7b81c9d859619c48c5d75906d7e0d93d",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 1 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "How does the tree covering technique differ in its application to ordinal trees versus binary trees?",
@@ -2448,8 +2448,8 @@
       }
     ],
     "case_id": "3b46ec4e348c2a317d20f9922ee004b1",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What recent results have been obtained on the Sherali-Adams hierarchy ?",
@@ -2505,8 +2505,8 @@
       }
     ],
     "case_id": "afff22e411e34366146c45ec4c7ff599",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How can question generation be used to mitigate hallucination in LLMs?",
@@ -2567,8 +2567,8 @@
       }
     ],
     "case_id": "fb607bc177d2efb926cb3dff15668861",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "During pre-training, why is the transformer embedding layer initialized randomly, rather than with pre-trained embeddings from existing models?",
@@ -2634,8 +2634,8 @@
       }
     ],
     "case_id": "e2d0eb391fbf674c070c74c387ee6248",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the leading thoughts about how to teach computer science to college students in the age of generative AI?",
@@ -2681,8 +2681,8 @@
       }
     ],
     "case_id": "fc927b39177cd2aad8a8cbcef75ab62c",
-    "research_subtype": "Annotator 1 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 1 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What data structures are commonly used to solve the Range Minimum Query (RMQ) problem?",
@@ -2723,8 +2723,8 @@
       }
     ],
     "case_id": "01a5d21763c1d38dd26ec52bd719e5ee",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What datasets and methods are used to pre-train models on table specific tasks?",
@@ -2770,8 +2770,8 @@
       }
     ],
     "case_id": "01d02d3984b60367c275972613992a64",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What are the main challenges in adapting transformer-based models for tabular data representation?",
@@ -2807,8 +2807,8 @@
       }
     ],
     "case_id": "183575a6b64714da860ca0dd4b2d1f48",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "what are leading techniques for safe navigation in partially observable environments with moving obstacles?",
@@ -2854,8 +2854,8 @@
       }
     ],
     "case_id": "3927ad11a6f7001173bfb2bbb9e8729e",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "how can RRT-based path planning be adapted to efficiently handle narrow pathways",
@@ -2901,8 +2901,8 @@
       }
     ],
     "case_id": "40ae2e68a52e2d5788f3da27f5d9decd",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "what are the advantages and disadvantages of visiotactile, piezoelectric, trieboelectric tactile sensors for robots?",
@@ -2958,8 +2958,8 @@
       }
     ],
     "case_id": "71b0b99a7954bf3dadd8cfd30ece359e",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "what kinds of challenges arise when trying to transfer robotics systems trained/designed in simulation to the real world?",
@@ -3000,8 +3000,8 @@
       }
     ],
     "case_id": "ad5d8d8dcdab789fbc9231709db8c9cb",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "is there any evidence that large language models can be effectively applied to robot planning tasks?",
@@ -3042,8 +3042,8 @@
       }
     ],
     "case_id": "6453c86c72949978fb8db5405b48c923",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "what are some datasets used for evaluating variable type inference for decompiled binaries?",
@@ -3079,8 +3079,8 @@
       }
     ],
     "case_id": "7bb6a69f01d91674d5a925266e360b44",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "how do post-quantum cryptography algorithms such as kyber/dilithium compare to corresponding non-quantum-safe methods in terms of performance and energy cost, and how could this be affected by future hardware optimizations?",
@@ -3131,8 +3131,8 @@
       }
     ],
     "case_id": "3a19520deab02250c7384cfbc79fcbff",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "how can software engineering process improvements be effectively measured in real-world settings?",
@@ -3168,8 +3168,8 @@
       }
     ],
     "case_id": "57f1dc7fb4c25e0cceb2ae6e8653b795",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "what are the best recent techniques for text watermarking, what kinds of transformations are they robust to, and what transformations or attacks are they not robust against",
@@ -3205,8 +3205,8 @@
       }
     ],
     "case_id": "6e7e3524d565599b3064ae05375956f7",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "what datasets are commonly used to evaluate SLAM methods",
@@ -3277,8 +3277,8 @@
       }
     ],
     "case_id": "83360f179fbaf73e400858ee4e17eda2",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are some practically-relevant properties of k-node subgraphs that can be counted in faster than cubic time in the size of the input graph?",
@@ -3309,8 +3309,8 @@
       }
     ],
     "case_id": "0dd4500b3ca1daf372dffb4378ee2c8f",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "The following paper focuses on a problem of counting the number of subgraphs in a graph that have certain properties.  What are the most significant downstream applications that either are or could be using these algorithms?  Concrete examples of the graph algorithms in use in real-world applications would be especially helpful.  https://arxiv.org/pdf/2407.06801",
@@ -3346,8 +3346,8 @@
       }
     ],
     "case_id": "f7d0d99e1d158e6f89eee62b5aace89c",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How have theories of distributed cognition informed the design of features in social computing systems?",
@@ -3378,8 +3378,8 @@
       }
     ],
     "case_id": "c6740fc5bd8daa6a8628ae279f07806a",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How has literature discussed AI as a design material?",
@@ -3415,8 +3415,8 @@
       }
     ],
     "case_id": "34b00939c1190990c1c9be590cb07476",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the key differences between participatory design and co-design?",
@@ -3457,8 +3457,8 @@
       }
     ],
     "case_id": "95a152ddae491933ef75c797f3584b08",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are some systems papers that conduct an observational study as the formative study instead of just interviews?",
@@ -3494,8 +3494,8 @@
       }
     ],
     "case_id": "6296a33a2bcc31f1b8f9a765e63aaf3b",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What principles of interactive machine teaching can be applied to interactively curating social media feeds?",
@@ -3551,8 +3551,8 @@
       }
     ],
     "case_id": "e61be146ef53f1a5483c668fc4f6390c",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Why do quadruped robots typically use 3 degrees of freedom for each leg?  What would be the disadvantages of 2 dof?",
@@ -3593,8 +3593,8 @@
       }
     ],
     "case_id": "e307068003936acfd8f82207c67e25bb",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Can you recommend a suitable theoretical lens for qualitative research concerning robotics process automation (RPA) implementations?",
@@ -3625,8 +3625,8 @@
       }
     ],
     "case_id": "880129a65489610c5c805e174e256072",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What considerations are important for material selection in fabricating industrial robotic grippers?  What are the advantages and disadvantages of soft vs rigid gripper materials?",
@@ -3667,8 +3667,8 @@
       }
     ],
     "case_id": "050725a9a16e6694b491f735c63ace96",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are good benchmarks and evaluation strategies for comparing obstacle avoidance strategies in mobile robots?",
@@ -3709,8 +3709,8 @@
       }
     ],
     "case_id": "eef3ee38231d9fa5ffabbec75d1c5b50",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are some biologically-inspired robot path planning algorithms?",
@@ -3746,8 +3746,8 @@
       }
     ],
     "case_id": "38dea1ab1b53857ef1e9ffad2aab6691",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Is it possible to get frequency domain information in a fenquency band beyond the limitation of nyquist theory?",
@@ -3788,8 +3788,8 @@
       }
     ],
     "case_id": "d521598603fbab74a6c13d58993f8b55",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How does the addition of XAI techniques such as SHAP or LIME impact model interpretability in complex machine learning models ?",
@@ -3835,8 +3835,8 @@
       }
     ],
     "case_id": "5480ba91951fc42e9beb989eea40360d",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What strategies are used to improve robustness and safety of quadrotor UAVs in extreme weather conditions?",
@@ -3872,8 +3872,8 @@
       }
     ],
     "case_id": "79eda5689229572a789e612010246d44",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Are there papers that use different formats of Q&A with the user to clarify intent and compose more complicated prompts to LLM?",
@@ -3909,8 +3909,8 @@
       }
     ],
     "case_id": "e03c49cccc971cf3ae67556554b4666b",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What theories from psychology are testable on a platform like mturk but haven't yet been studied in the HCI literature?",
@@ -3941,8 +3941,8 @@
       }
     ],
     "case_id": "d28ae3b3ee305bf7a2f3a4fc3ed68331",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What performance metrics are typically used for evaluating differential privacy systems?",
@@ -3978,8 +3978,8 @@
       }
     ],
     "case_id": "f5d0906eb95bf278d7c5b55a1de0644c",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What data analysis tool are the most accurate for an appraisal of a mixed methodology research study?",
@@ -4015,8 +4015,8 @@
       }
     ],
     "case_id": "db4211ada9ca179cddb052bf63e732a1",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How is artificial intelligence being utilized to enhance the diagnosis and treatment of sleep apnea?",
@@ -4062,8 +4062,8 @@
       }
     ],
     "case_id": "e09a30179e0b587d57edb17317ae3288",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What is a good Ontology semantic similarity measure that considers multiple inheritance cases of concepts?",
@@ -4099,8 +4099,8 @@
       }
     ],
     "case_id": "ef77a4f716eda4a6c980c9d7a56c5bb4",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the latest techniques for ensuring the reliability of a P2P storage system?",
@@ -4141,8 +4141,8 @@
       }
     ],
     "case_id": "e55f39332cdc48743ea977d0ec4d0e3e",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are existing methods to elicit user intents when an automation encounters ambiguity, especially in failure cases?",
@@ -4173,8 +4173,8 @@
       }
     ],
     "case_id": "de3b24bf31962c6107002d487f2bab5e",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the leading techniques for person-following robot navigation (which must track the person and potentially re-identify if occluded)?",
@@ -4205,8 +4205,8 @@
       }
     ],
     "case_id": "3d8c315aed4cc104f2ad61f4deeda9c1",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are different techniques in Non-linear, Non-stationary signal processing? Which one is much effective in view of Geophysical signals?",
@@ -4247,8 +4247,8 @@
       }
     ],
     "case_id": "ca229869d669f7985df9e6b2280c7349",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the most important practical applications of dextrous, in-hand robotic manipulation?",
@@ -4279,8 +4279,8 @@
       }
     ],
     "case_id": "d4e24c4f015d55b91350ce6267a7af5e",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What interfaces have researchers developed for helping people optimize LLMs for a task, and what are the biggest remaining user problems?",
@@ -4316,8 +4316,8 @@
       }
     ],
     "case_id": "7670af632f0932d5ed20c34e1c9f01d2",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "With respect to signal processing which operator is more sensitive to noise detection, first order or second order and why?",
@@ -4358,8 +4358,8 @@
       }
     ],
     "case_id": "9931fdf53f47af01cd84e446d5676292",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are some principles for designing just-in-time interventions in a programming scenario?",
@@ -4395,8 +4395,8 @@
       }
     ],
     "case_id": "798f4cf8735e057c9956945ced665a8c",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the most important open challenges in Federated Learning?",
@@ -4427,8 +4427,8 @@
       }
     ],
     "case_id": "64ef9b9e4c220dd1a2f6115b2a9e242a",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are metrics to mesures the quality of human robot communication?",
@@ -4459,8 +4459,8 @@
       }
     ],
     "case_id": "89477b47d76d0cc8eb59b1b7938bb988",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "The Nyquist-Shannon theorem provides an upper bound for the sampling period when designing a Kalman filter. Leaving apart the computational cost, are there any other reasons, e.g., noise-related issues, to set a lower bound for the sampling period? And, if so, is there an optimal value between these bounds?",
@@ -4496,8 +4496,8 @@
       }
     ],
     "case_id": "0650cf7bfe45d90ba3e1bb72427bf04a",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What publicly available datasets are typically used for evaluating type inference systems in python?",
@@ -4538,8 +4538,8 @@
       }
     ],
     "case_id": "98debf018d6ed82c9f7297d0e59681b0",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What are leading methods for generating hard examples of the boolean satisfiability problem, and what are their strengths and weaknesses?",
@@ -4580,8 +4580,8 @@
       }
     ],
     "case_id": "7b42d39d9f8fdb3a8ec1dd783d66d6c2",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What is unique k-sat and what theoretical results are known about it?",
@@ -4617,8 +4617,8 @@
       }
     ],
     "case_id": "a006865cdd1db1cfc34bfbec067d47e4",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "In recommendation systems, how are new methods that optimize diversity typically evaluated?",
@@ -4654,8 +4654,8 @@
       }
     ],
     "case_id": "b069a1248503c4caa98dab0014d1a55a",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "In robotics, what are the leading methods for learning terrain traversibility costs automatically from robot experience?",
@@ -4686,8 +4686,8 @@
       }
     ],
     "case_id": "e2e6287d2687772bb02cfc5107047cb6",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": true
+    "annotator": "Annotator 2 Assignments",
+    "agreement": true
   },
   {
     "initial_prompt": "What are some of the challenges associated with creating a training dataset for question answering in scientific domains? Describe some recent methods that try to overcome these challenges.",
@@ -4728,8 +4728,8 @@
       }
     ],
     "case_id": "0ed1770483ec64633a580366026dd16e",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "How does multiplexing enhance data transmission efficiency in communication networks?",
@@ -4770,8 +4770,8 @@
       }
     ],
     "case_id": "ba4b2561ecf64f1c1cc1e16e207312be",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are the leading approaches to automatic scientific paper review generation and what are their strengths and weaknesses?",
@@ -4807,8 +4807,8 @@
       }
     ],
     "case_id": "aab38dd1282ff3387cc8bf9bdf13b3aa",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "Does active learning work well when fine-tuning large language models?",
@@ -4828,8 +4828,8 @@
       }
     ],
     "case_id": "983e73defc06e6794a856330905dc787",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   },
   {
     "initial_prompt": "What are some tasks where fine tuning smaller models is beneficial over using LLMs?",
@@ -4849,7 +4849,7 @@
       }
     ],
     "case_id": "a5d23eb3a2555db0a82f6b64fed85baa",
-    "research_subtype": "Annotator 2 Assignments",
-    "rubric_english": false
+    "annotator": "Annotator 2 Assignments",
+    "agreement": false
   }
 ]

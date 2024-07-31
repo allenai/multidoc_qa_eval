@@ -55,8 +55,8 @@ for d in tqdm(annotations):
             "criterion": item,
             "weight": niceimp_weight,
         })
-    qn["research_subtype"] = d["spreadsheet"]["name"]
-    qn["rubric_english"] = d["agreement"]
+    qn["annotator"] = d["spreadsheet"]["name"]
+    qn["agreement"] = d["agreement"]
     test_cases.append(qn)
 
 with open("data/test_configs.json", "w") as f:
