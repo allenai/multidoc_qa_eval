@@ -13,6 +13,7 @@ from corpusqa_rubric import RubricCorpusQaGenericMetric
 from litellm.caching import Cache
 from pydantic.v1 import BaseModel, Field
 from tqdm import tqdm
+import glob
 
 LOGGER = logging.getLogger(__name__)
 
@@ -38,51 +39,32 @@ class TestCase(BaseModel):
         resp["scores"] = metric.score_output(self.response)
         resp["case_id"] = self.case_id
         resp["annotator"] = self.annotator
+        resp["agreement"] = self.agreement
         return resp
 
 
 class LlmEval:
-    def __init__(self, case_file: str, qa_file: str):
-        self.case_file = case_file
-        self.qa_file = qa_file
+    def __init__(self, test_config: List[Dict[str, Any]], responses: Dict[str, str]):
+        self.test_configs = test_config
+        self.responses = responses
 
     def make_test_cases(
-        self, src: str = None, skip_duplicate_annotations=True
+            self, skip_duplicate_annotations=True
     ) -> List[TestCase]:
-        with open(self.case_file) as f:
-            configs = json.load(f)
 
-        responses = dict()
-
-        print("Reading responses...")
-        with open(self.qa_file) as f:
-            for line in f:
-                qa = json.loads(line)
-                if src == "single":
-                    response = qa["sources"][0]["answer_txt"]
-                else:
-                    for src_ans in qa["sources"]:
-                        if src_ans["name"] == src:
-                            response = src_ans["answer_txt"]
-                            break
-                responses[qa["case_id"]] = response
-        print(f"{len(responses)} responses obtained for eval...")
         test_cases = []
         seen_agreements = set()
-        for conf in configs:
-            if conf["case_id"] not in responses:
+        for conf in self.test_configs:
+            if conf["case_id"] not in self.responses:
                 continue
-            conf["response"] = responses[conf["case_id"]]
-            if conf["agreement"]:
-                if (
+            conf["response"] = self.responses[conf["case_id"]]
+            if (
                     conf["initial_prompt"] in seen_agreements
                     and skip_duplicate_annotations
-                ):
-                    continue
-                seen_agreements.add(conf["initial_prompt"])
+            ):
+                continue
+            seen_agreements.add(conf["initial_prompt"])
             test_cases.append(TestCase(**conf))
-
-        print(f"Created {len(test_cases)} tests for src: {src}...")
         return test_cases
 
 
@@ -97,18 +79,33 @@ def calculate_icc(scores1, scores2):
     s2 = (sum1 + sum2) / (2 * n - 1)
 
     icc = sum((x - grand_mean) * (y - grand_mean) for x, y in score_pairs) / (
-        (n - 1) * s2
+            (n - 1) * s2
     )
     return icc
+
+
+def load_sys_responses(qa_files):
+    sys_responses = dict()
+    for qa_file in qa_files:
+        curr_responses = dict()
+        print(f"Reading responses for source {qa_file}...")
+        with open(qa_file) as f:
+            for line in f:
+                qa = json.loads(line)
+                curr_responses[qa["case_id"]] = qa["answer_text"]
+        print(f"{len(curr_responses)} responses obtained for eval...")
+        sys_responses[qa_file] = curr_responses
+    return sys_responses
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--qa-file",
+        "--qa-dir",
         type=str,
         required=True,
-        help="Jsonl file containing queries and responses from system(s) to be evaluated",
+        help="Directory containing *.jsonl files with queries and responses from system(s) to be evaluated. "
+             "(All the files will be picked, to filter to specific files provide src-names param)",
     )
     parser.add_argument(
         "--rubrics",
@@ -132,7 +129,7 @@ def main():
     parser.add_argument(
         "--src-names",
         type=str,
-        help="names of the sources to evaluate (comma separated)",
+        help="names of the source files to evaluate (comma separated with .jsonl extension)",
         default=None,
     )
 
@@ -140,23 +137,27 @@ def main():
 
     litellm.cache = Cache(type="disk", disk_cache_dir="./data/litellm_cache/")
 
-    srcs = args.src_names.split(",") if args.src_names else []
-    llm_evals = dict()
-    if not srcs:
-        llm_eval = LlmEval(args.rubrics, args.qa_file)
-        llm_evals["single"] = llm_eval
+    if args.src_names:
+        srcs = [s.strip() for s in args.src_names.split(",")]
+        qa_files = [f"{args.qa_dir}/{src}.jsonl" for src in srcs]
     else:
-        for src in srcs:
-            llm_eval = LlmEval(args.rubrics, args.qa_file)
-            llm_evals[src] = llm_eval
+        qa_files = glob.glob(f"{args.qa_dir}/*.jsonl")
+    qa_files.sort()
+    print(f"{len(qa_files)} src files found: {qa_files}")
+
+    sys_responses = load_sys_responses(qa_files)
+    test_config = json.load(open(args.rubrics, "r"))
 
     results_by_src = dict()
     qn_by_case = dict()
-    for src, llm_eval in llm_evals.items():
+    for src, responses in sys_responses.items():
+        llm_eval = LlmEval(test_config, responses)
+        print()
         print(f"Creating test cases for src: {src}...")
         test_cases = llm_eval.make_test_cases(
-            src, skip_duplicate_annotations=(not args.agreement)
+            skip_duplicate_annotations=(not args.agreement)
         )
+        print(f"Created {len(test_cases)} tests for src: {src}...")
         for test_case in test_cases:
             qn_by_case[test_case.case_id] = test_case.initial_prompt
         results_by_src[src] = []
@@ -166,13 +167,13 @@ def main():
                 executor.submit(test_case.run): test_case for test_case in test_cases
             }
             for future in tqdm(
-                as_completed(future_to_test_case), total=len(test_cases)
+                    as_completed(future_to_test_case), total=len(test_cases)
             ):
                 results_by_src[src].append(future.result())
 
     with open(args.output, "w") as f:
         json.dump(results_by_src, f)
-        print(f"Results written to {args.output}")
+        print(f"Results written to {args.output}\n")
 
     for src, results in results_by_src.items():
         print(
@@ -183,14 +184,15 @@ def main():
     # labels, but rather the agreement in the scores their rubrics assign to
     # the same response.
     if args.agreement:
-        print("Calculating agreement...")
+        print("\nCalculating agreement...")
         results_by_annotator = dict()
         for src, results in results_by_src.items():
             for res in results:
                 res["src"] = src
-                if res["annotator"] not in results_by_annotator:
-                    results_by_annotator[res["annotator"]] = []
-                results_by_annotator[res["annotator"]].append(res)
+                if res["agreement"]:
+                    if res["annotator"] not in results_by_annotator:
+                        results_by_annotator[res["annotator"]] = []
+                    results_by_annotator[res["annotator"]].append(res)
         if len(results_by_annotator) != 2:
             raise ValueError(
                 f"Need exactly 2 annotators to calculate agreement, got {len(results_by_annotator)}"
@@ -202,17 +204,17 @@ def main():
         def casekey(x):
             return (qn_by_case[x["case_id"]], x["src"])
 
-        union_ids = set([casekey(x) for x in anno1]) | set([casekey(x) for x in anno2])
-        overlapping_ids = set([casekey(x) for x in anno1]) & set(
-            [casekey(x) for x in anno2]
-        )
-        if len(overlapping_ids) != len(union_ids):
-            print(
-                f"Pruned {len(union_ids) - len(overlapping_ids)} cases from one or both annotators"
-            )
-
-        anno1 = [x for x in anno1 if casekey(x) in overlapping_ids]
-        anno2 = [x for x in anno2 if casekey(x) in overlapping_ids]
+        # union_ids = set([casekey(x) for x in anno1]) | set([casekey(x) for x in anno2])
+        # overlapping_ids = set([casekey(x) for x in anno1]) & set(
+        #     [casekey(x) for x in anno2]
+        # )
+        # if len(overlapping_ids) != len(union_ids):
+        #     print(
+        #         f"Pruned {len(union_ids) - len(overlapping_ids)} cases from one or both annotators"
+        #     )
+        #
+        # anno1 = [x for x in anno1 if casekey(x) in overlapping_ids]
+        # anno2 = [x for x in anno2 if casekey(x) in overlapping_ids]
 
         anno1.sort(key=casekey)
         anno2.sort(key=casekey)
