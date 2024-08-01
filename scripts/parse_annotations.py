@@ -3,9 +3,8 @@ import json
 import os
 import re
 from typing import Callable
-import os
-import requests
 
+import requests
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -22,8 +21,8 @@ SCOPES = [
     "https://www.googleapis.com/auth/documents.readonly",
 ]
 
-CLIENT_SECRET_FILE = 'cred.json'
-TOKEN_FILE = 'token.json'
+CLIENT_SECRET_FILE = "cred.json"
+TOKEN_FILE = "token.json"
 
 
 def get_credentials():
@@ -38,9 +37,7 @@ def get_credentials():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                CLIENT_SECRET_FILE, SCOPES
-            )
+            flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open(TOKEN_FILE, "w") as token:
@@ -52,24 +49,28 @@ def format_nora_ans(nora_ans, question):
     nora_text = ""
     for section in nora_ans:
         header = f"{section['title']}\nTLDR: {section['tldr']}"
-        text = section['text']
-        citations = section['citations']
+        text = section["text"]
+        citations = section["citations"]
         cite_text = ""
         if citations:
             r = requests.post(
-                'https://api.semanticscholar.org/graph/v1/paper/batch',
-                params={'fields': 'externalIds,title'},
-                json={"ids": [f"CorpusID:{citation['corpus_id']}" for citation in citations]},
-                headers={"x-api-key": S2_API_KEY}
+                "https://api.semanticscholar.org/graph/v1/paper/batch",
+                params={"fields": "externalIds,title"},
+                json={
+                    "ids": [
+                        f"CorpusID:{citation['corpus_id']}" for citation in citations
+                    ]
+                },
+                headers={"x-api-key": S2_API_KEY},
             )
             title_dict = {}
             if r.status_code == 200:
                 rjson = r.json()
                 for paper in rjson:
-                    title_dict[int(paper['externalIds']['CorpusId'])] = paper['title']
+                    title_dict[int(paper["externalIds"]["CorpusId"])] = paper["title"]
 
             for j, citation in enumerate(citations):
-                if citation['corpus_id'] in title_dict:
+                if citation["corpus_id"] in title_dict:
                     cite_text += f"{j + 1}. [{citation['id']} | n_citations: {citation['n_citations']} | {title_dict[citation['corpus_id']]} ]: \n{'... '.join(citation['snippets'])}\n\n"
             if not cite_text:
                 print(question)
@@ -133,11 +134,11 @@ def element_to_markdown(elem: dict):
             m1 = re.search(r"^\s+", pieces[1])
             if m1:
                 pieces[0] = m1.string[: m1.start()]
-                pieces[1] = m1.string[m1.start():]
+                pieces[1] = m1.string[m1.start() :]
             m2 = re.search(r"\s+$", pieces[1])
             if m2:
                 pieces[1] = m2.string[: m2.start()]
-                pieces[2] = m2.string[m2.start():]
+                pieces[2] = m2.string[m2.start() :]
             pieces[1] = f"**{pieces[1]}**"
             elem_txt = "".join(pieces)
 
@@ -168,13 +169,13 @@ def parse_ingredients_from_doc(doc):
             if "textRun" not in para["elements"][0]:
                 continue
             if (
-                    para["elements"][0]["textRun"]["content"].lower().strip()
-                    == "most important"
+                para["elements"][0]["textRun"]["content"].lower().strip()
+                == "most important"
             ):
                 cur_lst = most_important_paras
             elif (
-                    para["elements"][0]["textRun"]["content"].lower().strip()
-                    == "nice to have"
+                para["elements"][0]["textRun"]["content"].lower().strip()
+                == "nice to have"
             ):
                 cur_lst = nice_to_have_paras
             elif "bullet" in para:
@@ -192,12 +193,12 @@ def parse_sources_from_doc(doc):
 
     for para in paragraphs:
         if ("headingId" in para.get("paragraphStyle", dict())) or (
-                para.get("elements")
-                and para["elements"][0]["textRun"]
-                        .get("textStyle", dict())
-                        .get("fontSize", dict())
-                        .get("magnitude", 12)
-                >= 15
+            para.get("elements")
+            and para["elements"][0]["textRun"]
+            .get("textStyle", dict())
+            .get("fontSize", dict())
+            .get("magnitude", 12)
+            >= 15
         ):
             source_name = para2txt(para, lambda x: x.strip().strip(":"))
             if source_name.strip() == "":
@@ -263,7 +264,9 @@ def main():
         for line in f:
             qa_metadata.append(json.loads(line))
 
-    qa_rev_idx = {qa_meta["question"].strip(): i for i, qa_meta in enumerate(qa_metadata)}
+    qa_rev_idx = {
+        qa_meta["question"].strip(): i for i, qa_meta in enumerate(qa_metadata)
+    }
     agreement_qidx = [i for i in range(5)] + [i for i in range(25, 30, 1)]
     creds = get_credentials()
     drive_service = build("drive", "v3", credentials=creds)
@@ -302,7 +305,10 @@ def main():
                 #     extract_doc_id_from_url(sources_link),
                 # )
                 # sources_answers = parse_sources_from_doc(sources_doc)
-                sources_answers = [{"name": qsrc, "answer_txt": qans} for qsrc, qans in qmeta["src_answers"].items()]
+                sources_answers = [
+                    {"name": qsrc, "answer_txt": qans}
+                    for qsrc, qans in qmeta["src_answers"].items()
+                ]
                 get_nora_answer(sources_answers, question)
                 data.append(
                     {

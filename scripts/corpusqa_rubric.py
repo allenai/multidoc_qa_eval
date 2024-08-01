@@ -3,8 +3,7 @@ import logging
 from typing import Any, Dict, List
 
 from pydantic.v1 import BaseModel, Field
-
-from run_utils import run_chatopenai, extract_json_from_response
+from run_utils import extract_json_from_response, run_chatopenai
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,8 +33,8 @@ class RubricCorpusQaGenericMetric:
     def _score_length(self, response: str, low_length, high_length) -> float:
         word_count = len(response.split())
         return 1 - (
-                (max(min(high_length, word_count), low_length) - low_length)
-                / (high_length - low_length)
+            (max(min(high_length, word_count), low_length) - low_length)
+            / (high_length - low_length)
         )
 
     def _score_property(self, response: str, question: str, prop: str) -> float:
@@ -73,8 +72,8 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
 Response: {response}
 
 Split the response into individual claims, citations, and excerpts from the citations, in JSON format: """
-                        '{"claims": [{"claim_text": "...", "citations": [{"citation_text": "...", "excerpts": ["...", ...]}, ...]}, ...]}'
-                        "\n\nIf a claim is missing citations or a citation is not accompanied by excerpts, some lists may be empty in your output.",
+            '{"claims": [{"claim_text": "...", "citations": [{"citation_text": "...", "excerpts": ["...", ...]}, ...]}, ...]}'
+            "\n\nIf a claim is missing citations or a citation is not accompanied by excerpts, some lists may be empty in your output.",
             json_mode=True,
         )
 
