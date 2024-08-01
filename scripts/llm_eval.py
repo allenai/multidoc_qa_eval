@@ -44,30 +44,20 @@ class TestCase(BaseModel):
 
 
 class LlmEval:
-    def __init__(self, case_file: str, qa_file: str):
-        self.case_file = case_file
-        self.qa_file = qa_file
+    def __init__(self, test_config: List[Dict[str, Any]], responses: Dict[str, str]):
+        self.test_configs = test_config
+        self.responses = responses
 
     def make_test_cases(
-            self, src: str = None, skip_duplicate_annotations=True
+            self, skip_duplicate_annotations=True
     ) -> List[TestCase]:
-        with open(self.case_file) as f:
-            configs = json.load(f)
 
-        responses = dict()
-
-        print("Reading responses...")
-        with open(self.qa_file) as f:
-            for line in f:
-                qa = json.loads(line)
-                responses[qa["case_id"]] = qa["answer_text"]
-        print(f"{len(responses)} responses obtained for eval...")
         test_cases = []
         seen_agreements = set()
-        for conf in configs:
-            if conf["case_id"] not in responses:
+        for conf in self.test_configs:
+            if conf["case_id"] not in self.responses:
                 continue
-            conf["response"] = responses[conf["case_id"]]
+            conf["response"] = self.responses[conf["case_id"]]
             if (
                     conf["initial_prompt"] in seen_agreements
                     and skip_duplicate_annotations
@@ -75,8 +65,6 @@ class LlmEval:
                 continue
             seen_agreements.add(conf["initial_prompt"])
             test_cases.append(TestCase(**conf))
-
-        print(f"Created {len(test_cases)} tests for src: {src}...")
         return test_cases
 
 
@@ -94,6 +82,20 @@ def calculate_icc(scores1, scores2):
             (n - 1) * s2
     )
     return icc
+
+
+def load_sys_responses(qa_files):
+    sys_responses = dict()
+    for qa_file in qa_files:
+        curr_responses = dict()
+        print(f"Reading responses for source {qa_file}...")
+        with open(qa_file) as f:
+            for line in f:
+                qa = json.loads(line)
+                curr_responses[qa["case_id"]] = qa["answer_text"]
+        print(f"{len(curr_responses)} responses obtained for eval...")
+        sys_responses[qa_file] = curr_responses
+    return sys_responses
 
 
 def main():
@@ -143,18 +145,19 @@ def main():
     qa_files.sort()
     print(f"{len(qa_files)} src files found: {qa_files}")
 
-    llm_evals = dict()
-    for qa_file in qa_files:
-            llm_eval = LlmEval(args.rubrics, qa_file)
-            llm_evals[qa_file] = llm_eval
+    sys_responses = load_sys_responses(qa_files)
+    test_config = json.load(open(args.rubrics, "r"))
 
     results_by_src = dict()
     qn_by_case = dict()
-    for src, llm_eval in llm_evals.items():
+    for src, responses in sys_responses.items():
+        llm_eval = LlmEval(test_config, responses)
+        print()
         print(f"Creating test cases for src: {src}...")
         test_cases = llm_eval.make_test_cases(
-            src, skip_duplicate_annotations=(not args.agreement)
+            skip_duplicate_annotations=(not args.agreement)
         )
+        print(f"Created {len(test_cases)} tests for src: {src}...")
         for test_case in test_cases:
             qn_by_case[test_case.case_id] = test_case.initial_prompt
         results_by_src[src] = []
@@ -170,7 +173,7 @@ def main():
 
     with open(args.output, "w") as f:
         json.dump(results_by_src, f)
-        print(f"Results written to {args.output}")
+        print(f"Results written to {args.output}\n")
 
     for src, results in results_by_src.items():
         print(
@@ -181,7 +184,7 @@ def main():
     # labels, but rather the agreement in the scores their rubrics assign to
     # the same response.
     if args.agreement:
-        print("Calculating agreement...")
+        print("\nCalculating agreement...")
         results_by_annotator = dict()
         for src, results in results_by_src.items():
             for res in results:
