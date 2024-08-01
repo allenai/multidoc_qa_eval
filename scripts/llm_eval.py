@@ -7,6 +7,7 @@ from datetime import datetime
 from typing import Any, Dict, List
 
 import litellm
+import numpy as np
 import scipy.stats
 from corpusqa_rubric import RubricCorpusQaGenericMetric
 from litellm.caching import Cache
@@ -83,6 +84,22 @@ class LlmEval:
 
         print(f"Created {len(test_cases)} tests for src: {src}...")
         return test_cases
+
+
+def calculate_icc(scores1, scores2):
+    """Calculate the intraclass correlation"""
+    score_pairs = list(zip(scores1, scores2))
+    n = len(score_pairs)
+    grand_mean = np.mean(scores1 + scores2)
+
+    sum1 = sum((x - grand_mean) ** 2 for x in scores1)
+    sum2 = sum((x - grand_mean) ** 2 for x in scores2)
+    s2 = (sum1 + sum2) / (2 * n - 1)
+
+    icc = sum((x - grand_mean) * (y - grand_mean) for x, y in score_pairs) / (
+        (n - 1) * s2
+    )
+    return icc
 
 
 def main():
@@ -162,6 +179,9 @@ def main():
             f'Avg score for src={src}: {statistics.mean([res["scores"]["score"] for res in results])}'
         )
 
+    # Note: "agreement" here is not actually agreement in the annotators'
+    # labels, but rather the agreement in the scores their rubrics assign to
+    # the same response.
     if args.agreement:
         print("Calculating agreement...")
         results_by_annotator = dict()
@@ -180,7 +200,6 @@ def main():
         anno2 = results_by_annotator[list(results_by_annotator.keys())[1]]
 
         def casekey(x):
-            # return (x["case_id"], x["src"])
             return (qn_by_case[x["case_id"]], x["src"])
 
         union_ids = set([casekey(x) for x in anno1]) | set([casekey(x) for x in anno2])
@@ -203,9 +222,11 @@ def main():
 
         scores1 = [x["scores"]["score"] for x in anno1]
         scores2 = [x["scores"]["score"] for x in anno2]
-        print(f"Agreement metrics across {len(scores1)} cases:")
-        print(f"        Pearson corr: {scipy.stats.pearsonr(scores1, scores2)}")
-        print(f"         Kendall tau: {scipy.stats.kendalltau(scores1, scores2)}")
+
+        print(f"\nAgreement metrics across {len(scores1)} cases:")
+        print(f"   Pearson corr: {scipy.stats.pearsonr(scores1, scores2)}")
+        print(f"    Kendall tau: {scipy.stats.kendalltau(scores1, scores2)}")
+        print(f"Intraclass corr: {calculate_icc(scores1, scores2):.4f}")
 
 
 if __name__ == "__main__":
