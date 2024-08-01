@@ -33,8 +33,8 @@ class RubricCorpusQaGenericMetric:
     def _score_length(self, response: str, low_length, high_length) -> float:
         word_count = len(response.split())
         return 1 - (
-            (max(min(high_length, word_count), low_length) - low_length)
-            / (high_length - low_length)
+                (max(min(high_length, word_count), low_length) - low_length)
+                / (high_length - low_length)
         )
 
     def _score_property(self, response: str, question: str, prop: str) -> float:
@@ -72,8 +72,8 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
 Response: {response}
 
 Split the response into individual claims, citations, and excerpts from the citations, in JSON format: """
-            '{"claims": [{"claim_text": "...", "citations": [{"citation_text": "...", "excerpts": ["...", ...]}, ...]}, ...]}'
-            "\n\nIf a claim is missing citations or a citation is not accompanied by excerpts, some lists may be empty in your output.",
+                        '{"claims": [{"claim_text": "...", "citations": [{"citation_text": "...", "excerpts": ["...", ...]}, ...]}, ...]}'
+                        "\n\nIf a claim is missing citations or a citation is not accompanied by excerpts, some lists may be empty in your output.",
             json_mode=True,
         )
 
@@ -126,4 +126,7 @@ Split the response into individual claims, citations, and excerpts from the cita
 
         assert set(score_components.keys()) == set(score_weights.keys())
         score = sum(score_weights[key] * score_components[key] for key in score_weights)
-        return {"score": score, **score_components}
+        static_score_keys = {"length", "expertise", "citations", "excerpts"}
+        ann_score = sum(
+            score_weights[key] * score_components[key] for key in score_weights if key not in static_score_keys)/0.6
+        return {"score": score, "ann_score": ann_score, **score_components}
