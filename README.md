@@ -29,3 +29,7 @@ Once the prediction json file is ready, save it a new directory run the eval scr
 export OPENAI_API_KEY=<openai key>
 python scripts/llm_eval.py --qa-dir <prediction jsonl file directory> --rubrics data/test_configs.json --src-names <optional comma separated src names prefixes of prediction files with .jsonl, if not given all the files will be picked>
 ```
+
+## License
+The aggregate test cases, sample system answers under `data/src_answers` and other files under data directory are released under [ODC-BY](https://opendatacommons.org/licenses/by/1.0/) license. By downloading this data you acknowledge that you have read and agreed to all the terms in this license.
+For constituent datasets, also go through the individual licensing requirements, as applicable. 
