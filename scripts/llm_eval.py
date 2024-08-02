@@ -40,6 +40,7 @@ class TestCase(BaseModel):
         resp["case_id"] = self.case_id
         resp["annotator"] = self.annotator
         resp["agreement"] = self.agreement
+        resp["question"] = self.initial_prompt
         return resp
 
 
@@ -222,8 +223,8 @@ def main():
         if [casekey(x) for x in anno1] != [casekey(x) for x in anno2]:
             raise ValueError(f"Got different cases for the two annotators")
 
-        scores1 = [x["scores"]["score"] for x in anno1]
-        scores2 = [x["scores"]["score"] for x in anno2]
+        scores1 = [x["scores"]["ann_score"] for x in anno1]
+        scores2 = [x["scores"]["ann_score"] for x in anno2]
 
         print(f"\nAgreement metrics across {len(scores1)} cases:")
         print(f"   Pearson corr: {scipy.stats.pearsonr(scores1, scores2)}")
