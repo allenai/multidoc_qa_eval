@@ -73,8 +73,6 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
         obj = extract_json_from_response(resp)
         if not obj:
             return 0.0
-        if "**ManyTypes4Py**" in snippets:
-            print(obj["score"], len(evidence))
         return obj["score"] / len(evidence)
 
     def _score_citations_excerpts(self, response: str) -> Dict[str, float]:
