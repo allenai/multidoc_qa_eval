@@ -4,7 +4,7 @@ import json
 from tqdm import tqdm
 
 annotations = []
-with open("data/output.jsonl", "r") as f:
+with open("data/output_snippets.jsonl", "r") as f:
     for line in f:
         annotations.append(json.loads(line))
 
@@ -55,8 +55,9 @@ for d in tqdm(annotations):
         qn["metric_config"]["config"]["other_properties"].append(
             {
                 "name": f"most_important_item_{item_idx}",
-                "criterion": item,
+                "criterion": item["text"],
                 "weight": mostimp_weight,
+                "evidence": item["snippets"],
             }
         )
 
@@ -64,13 +65,14 @@ for d in tqdm(annotations):
         qn["metric_config"]["config"]["other_properties"].append(
             {
                 "name": f"nice_to_have_item_{item_idx}",
-                "criterion": item,
+                "criterion": item["text"],
                 "weight": niceimp_weight,
+                "evidence": item["snippets"],
             }
         )
     qn["annotator"] = d["spreadsheet"]["name"]
     qn["agreement"] = d["agreement"]
     test_cases.append(qn)
 
-with open("data/test_configs.json", "w") as f:
+with open("data/test_configs_snippets.json", "w") as f:
     json.dump(test_cases, f, indent=2)

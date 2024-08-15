@@ -10,6 +10,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from tqdm import tqdm
+from isounidecode import unidecode
 
 S2_API_KEY = os.environ.get("S2_API_KEY")
 # If modifying these scopes, delete the file token.json.
@@ -134,11 +135,11 @@ def element_to_markdown(elem: dict):
             m1 = re.search(r"^\s+", pieces[1])
             if m1:
                 pieces[0] = m1.string[: m1.start()]
-                pieces[1] = m1.string[m1.start() :]
+                pieces[1] = m1.string[m1.start():]
             m2 = re.search(r"\s+$", pieces[1])
             if m2:
                 pieces[1] = m2.string[: m2.start()]
-                pieces[2] = m2.string[m2.start() :]
+                pieces[2] = m2.string[m2.start():]
             pieces[1] = f"**{pieces[1]}**"
             elem_txt = "".join(pieces)
 
@@ -163,27 +164,59 @@ def parse_ingredients_from_doc(doc):
     nice_to_have_paras = []
     other_paras = []
     cur_lst = other_paras
-
+    parse_snippets = False
+    pre_quotes, post_quotes = False, False
+    snippet_para = {"elements": []}
     for para in paragraphs:
         if len(para.get("elements", [])) >= 1:
             if "textRun" not in para["elements"][0]:
                 continue
             if (
-                para["elements"][0]["textRun"]["content"].lower().strip()
-                == "most important"
+                    para["elements"][0]["textRun"]["content"].lower().strip()
+                    == "most important"
             ):
                 cur_lst = most_important_paras
+                parse_snippets = False
             elif (
-                para["elements"][0]["textRun"]["content"].lower().strip()
-                == "nice to have"
+                    para["elements"][0]["textRun"]["content"].lower().strip()
+                    == "nice to have"
             ):
                 cur_lst = nice_to_have_paras
-            elif "bullet" in para:
-                cur_lst.append(para)
+                parse_snippets = False
+            elif "bullet" in para and not pre_quotes:
+                cur_lst.append({"text": para, "snippets": []})
+                parse_snippets = True
+            elif (
+                    para["elements"][0]["textRun"]["content"].lower().strip()
+                    == "supporting quotes"
+            ) or (para["elements"][-1]["textRun"]["content"].lower().strip()
+                  == "supporting quotes"):
+                parse_snippets = True
+            elif parse_snippets:
+                for element in para["elements"]:
+                    if "textRun" in element:
+                        curr_text = unidecode(element["textRun"]["content"].strip()).decode("utf-8")
+                        if curr_text and curr_text[0] == '"':
+                            pre_quotes = True
+                        if curr_text and len(curr_text) > 1 and pre_quotes and curr_text[-1] == '"':
+                            post_quotes = True
+                        if pre_quotes or post_quotes:
+                            snippet_para["elements"].append(element)
+                if pre_quotes and post_quotes:
+                    # print(snippet_para)
+                    cur_lst[-1]["snippets"].append(snippet_para)
+                    pre_quotes, post_quotes = False, False
+                    snippet_para = {"elements": []}
 
     return {
-        "most_important": [para2txt(p, str.strip) for p in most_important_paras],
-        "nice_to_have": [para2txt(p, str.strip) for p in nice_to_have_paras],
+        "most_important": [{"text": para2txt(p["text"], str.strip),
+                            "snippets": [unidecode(para2txt(s, str.strip)).decode("utf-8")[1:-1] for s in
+                                         p["snippets"]]} for p in
+                           most_important_paras],
+        "nice_to_have": [{"text": para2txt(p["text"], str.strip),
+                          "snippets": [unidecode(para2txt(s, str.strip)).decode("utf-8")[1:-1] for s in p["snippets"]]}
+                         for p in
+                         nice_to_have_paras],
     }
 
 
@@ -193,12 +226,12 @@ def parse_sources_from_doc(doc):
 
     for para in paragraphs:
         if ("headingId" in para.get("paragraphStyle", dict())) or (
-            para.get("elements")
-            and para["elements"][0]["textRun"]
-            .get("textStyle", dict())
-            .get("fontSize", dict())
-            .get("magnitude", 12)
-            >= 15
+                para.get("elements")
+                and para["elements"][0]["textRun"]
+                        .get("textStyle", dict())
+                        .get("fontSize", dict())
+                        .get("magnitude", 12)
+                >= 15
         ):
             source_name = para2txt(para, lambda x: x.strip().strip(":"))
             if source_name.strip() == "":
@@ -285,7 +318,7 @@ def main():
             if len(row) >= 3:
                 question, doc_link, sources_link = row
                 qidx = qa_rev_idx[question.strip()]
-                print(f"Processing ingredients doc: {doc_link}")
+                print(f"Processing ingredients doc: {doc_link} for question: {question}")
                 qmeta = qa_metadata[qidx]
                 if qidx not in agreement_qidx:
                     qmeta["key_ingredients"] = [doc_link]
@@ -295,6 +328,8 @@ def main():
                 )
                 try:
                     ingredients = parse_ingredients_from_doc(ingredients_doc)
+                    ingredients = {k: [ing for ing in v if ing["text"] != "__"] for k, v in ingredients.items()}
+
                 except:
                     print(f"Error parsing ingredients doc: {doc_link}")
                     ingredients = {"most_important": [], "nice_to_have": []}
@@ -309,7 +344,7 @@ def main():
                     {"name": qsrc, "answer_txt": qans}
                     for qsrc, qans in qmeta["src_answers"].items()
                 ]
-                get_nora_answer(sources_answers, question)
+                # get_nora_answer(sources_answers, question)
                 data.append(
                     {
                         "spreadsheet": spreadsheet,
@@ -322,7 +357,7 @@ def main():
                     }
                 )
 
-    with open("data/output.jsonl", "w") as f:
+    with open("data/output_snippets.jsonl", "w") as f:
         for entry in data:
             f.write(json.dumps(entry) + "\n")
 

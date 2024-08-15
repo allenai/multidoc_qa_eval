@@ -16,9 +16,12 @@ def extract_json_from_response(response: str) -> Optional[Dict[str, Any]]:
     try:
         return json.loads(response[json_start:json_end])
     except json.JSONDecodeError:
-        LOGGER.warning(
-            f"Could not decode JSON from response: {response[json_start:json_end]}"
-        )
+        try:
+            return json.loads(response[json_start:json_end]+"]}")
+        except json.JSONDecodeError:
+            LOGGER.warning(
+                f"Could not decode JSON from response: {response[json_start:json_end]}"
+            )
         return None
 
 

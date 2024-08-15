@@ -45,9 +45,12 @@ class TestCase(BaseModel):
 
 
 class LlmEval:
-    def __init__(self, test_config: List[Dict[str, Any]], responses: Dict[str, str]):
+    def __init__(self, test_config: List[Dict[str, Any]], responses: Dict[str, str], use_rubrics: bool,
+                 use_snippets: bool):
         self.test_configs = test_config
         self.responses = responses
+        self.use_snippets = use_snippets
+        self.use_rubrics = use_rubrics
 
     def make_test_cases(
             self, skip_duplicate_annotations=True
@@ -58,6 +61,12 @@ class LlmEval:
         for conf in self.test_configs:
             if conf["case_id"] not in self.responses:
                 continue
+            if not self.use_rubrics:
+                for prop in conf["metric_config"]["config"]["other_properties"]:
+                    prop["criterion"] = ""
+            if not self.use_snippets:
+                for prop in conf["metric_config"]["config"]["other_properties"]:
+                    prop["evidence"] = []
             conf["response"] = self.responses[conf["case_id"]]
             if (
                     conf["initial_prompt"] in seen_agreements
@@ -109,7 +118,7 @@ def main():
              "(All the files will be picked, to filter to specific files provide src-names param)",
     )
     parser.add_argument(
-        "--rubrics",
+        "--test-config",
         type=str,
         required=True,
         help="Json file containing rubrics for all the questions to be evaluated",
@@ -126,7 +135,18 @@ def main():
         help="Calculate agreement between annotators",
         default=False,
     )
-
+    parser.add_argument(
+        "--snippets",
+        action="store_true",
+        help="Score system for answer snippets",
+        default=False,
+    )
+    parser.add_argument(
+        "--rubrics",
+        action="store_true",
+        help="Score system for answer rubrics",
+        default=False,
+    )
     parser.add_argument(
         "--src-names",
         type=str,
@@ -147,12 +167,12 @@ def main():
     print(f"{len(qa_files)} src files found: {qa_files}")
 
     sys_responses = load_sys_responses(qa_files)
-    test_config = json.load(open(args.rubrics, "r"))
+    test_config = json.load(open(args.test_config, "r"))
 
     results_by_src = dict()
     qn_by_case = dict()
     for src, responses in sys_responses.items():
-        llm_eval = LlmEval(test_config, responses)
+        llm_eval = LlmEval(test_config, responses, args.rubrics, args.snippets)
         print()
         print(f"Creating test cases for src: {src}...")
         test_cases = llm_eval.make_test_cases(
@@ -171,6 +191,7 @@ def main():
                     as_completed(future_to_test_case), total=len(test_cases)
             ):
                 results_by_src[src].append(future.result())
+        results_by_src[src].sort(key=lambda x: (x["annotator"], x["case_id"]))
 
     with open(args.output, "w") as f:
         json.dump(results_by_src, f)
@@ -178,58 +199,34 @@ def main():
 
     for src, results in results_by_src.items():
         print(
-            f'Avg score for src={src}: {statistics.mean([res["scores"]["score"] for res in results])}'
+            f'Avg score for src={src}: {round(statistics.mean([res["scores"]["score"] for res in results]), 3)}'
         )
 
     # Note: "agreement" here is not actually agreement in the annotators'
     # labels, but rather the agreement in the scores their rubrics assign to
     # the same response.
     if args.agreement:
+        qn_results = dict()
         print("\nCalculating agreement...")
-        results_by_annotator = dict()
         for src, results in results_by_src.items():
             for res in results:
-                res["src"] = src
                 if res["agreement"]:
-                    if res["annotator"] not in results_by_annotator:
-                        results_by_annotator[res["annotator"]] = []
-                    results_by_annotator[res["annotator"]].append(res)
-        if len(results_by_annotator) != 2:
-            raise ValueError(
-                f"Need exactly 2 annotators to calculate agreement, got {len(results_by_annotator)}"
-            )
+                    if res["question"] not in qn_results:
+                        qn_results[res["question"]] = [[], []]
+                    if res["annotator"] == "Annotator 1 Assignments":
+                        qn_results[res["question"]][0].append(-res["scores"]["ann_score"])
+                    else:
+                        qn_results[res["question"]][1].append(-res["scores"]["ann_score"])
+        ktaus, pcorr = [], []
+        for qn, scores in qn_results.items():
+            ann1, ann2 = [int(x) for x in np.argsort(scores[0]) + 1], [int(x) for x in np.argsort(scores[1]) + 1]
+            ktaus.append(np.abs(scipy.stats.kendalltau(ann1, ann2)[0]))
+            pcorr.append(np.abs(scipy.stats.pearsonr(ann1, ann2)[0]))
 
-        anno1 = results_by_annotator[list(results_by_annotator.keys())[0]]
-        anno2 = results_by_annotator[list(results_by_annotator.keys())[1]]
 
-        def casekey(x):
-            return (qn_by_case[x["case_id"]], x["src"])
-
-        # union_ids = set([casekey(x) for x in anno1]) | set([casekey(x) for x in anno2])
-        # overlapping_ids = set([casekey(x) for x in anno1]) & set(
-        #     [casekey(x) for x in anno2]
-        # )
-        # if len(overlapping_ids) != len(union_ids):
-        #     print(
-        #         f"Pruned {len(union_ids) - len(overlapping_ids)} cases from one or both annotators"
-        #     )
-        #
-        # anno1 = [x for x in anno1 if casekey(x) in overlapping_ids]
-        # anno2 = [x for x in anno2 if casekey(x) in overlapping_ids]
-
-        anno1.sort(key=casekey)
-        anno2.sort(key=casekey)
-
-        if [casekey(x) for x in anno1] != [casekey(x) for x in anno2]:
-            raise ValueError(f"Got different cases for the two annotators")
-
-        scores1 = [x["scores"]["ann_score"] for x in anno1]
-        scores2 = [x["scores"]["ann_score"] for x in anno2]
-
-        print(f"\nAgreement metrics across {len(scores1)} cases:")
-        print(f"   Pearson corr: {scipy.stats.pearsonr(scores1, scores2)}")
-        print(f"    Kendall tau: {scipy.stats.kendalltau(scores1, scores2)}")
-        print(f"Intraclass corr: {calculate_icc(scores1, scores2):.4f}")
+        print(f"\nAgreement metrics across {len(ktaus)} cases:")
+        print(f"   Pearson corr: {round(np.mean(pcorr), 3)}")
+        print(f"    Kendall tau: {round(np.mean(ktaus), 3)}")
 
 
 if __name__ == "__main__":
