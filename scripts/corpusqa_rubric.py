@@ -73,7 +73,7 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
         obj = extract_json_from_response(resp)
         if not obj:
             return 0.0
-        return obj["score"] / len(evidence)
+        return min(obj["score"] / len(evidence), 1.0)
 
     def _score_citations_excerpts(self, response: str) -> Dict[str, float]:
 
@@ -151,7 +151,7 @@ Split the response into individual claims, citations, and excerpts from the cita
                 )
             if x.evidence:
                 score_components[f"{x.name}_evidence"] = self._score_evidence(
-                    response, x.evidence)
+                    response, x.evidence) if not x.criterion or score_components.get(x.name) else 0.0
 
         assert set(score_components.keys()) == set(score_weights.keys())
         score = sum(score_weights[key] * score_components[key] for key in score_weights)
