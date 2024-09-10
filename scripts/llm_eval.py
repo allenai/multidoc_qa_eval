@@ -34,6 +34,7 @@ class TestCase(BaseModel):
     response: str = Field(description="The response from the system.")
 
     def run(self) -> Dict[str, Any]:
+        """Run the test case and return the results."""
         metric = RubricCorpusQaGenericMetric(self.metric_config["config"])
         resp = dict()
         resp["scores"] = metric.score_output(self.response)
@@ -53,9 +54,12 @@ class LlmEval:
         self.use_rubrics = use_rubrics
 
     def make_test_cases(
-            self, skip_duplicate_annotations=True
+            self, skip_duplicate_annotations: bool = True
     ) -> List[TestCase]:
-
+        """Create a list of ``TestCase`` objects by mapping each system response to each test query.
+        param: skip_duplicate_annotations: Skip duplicate annotations for the same query.
+        return: list of test cases
+        """
         test_cases = []
         seen_agreements = set()
         for conf in self.test_configs:
@@ -94,7 +98,11 @@ def calculate_icc(scores1, scores2):
     return icc
 
 
-def load_sys_responses(qa_files):
+def load_sys_responses(qa_files: List[str]) -> Dict[str, Dict[str, str]]:
+    """Load system answers for each test query by iterating over the ``qa_files`` jsonl files.
+        :param qa_files: list of paths to the jsonl files containing system responses
+        :returns sys_response dict with keys as the qa_files names and values as the dict of test case_id to response
+    """
     sys_responses = dict()
     for qa_file in qa_files:
         curr_responses = dict()
@@ -158,6 +166,7 @@ def main():
 
     litellm.cache = Cache(type="disk", disk_cache_dir="./data/litellm_cache/")
 
+    # If src_names is provided, only evaluate those files, else all the jsonl files under args.qa_dir directory
     if args.src_names:
         srcs = [s.strip() for s in args.src_names.split(",")]
         qa_files = [f"{args.qa_dir}/{src}.jsonl" for src in srcs]
@@ -167,10 +176,14 @@ def main():
     print(f"{len(qa_files)} src files found: {qa_files}")
 
     sys_responses = load_sys_responses(qa_files)
+
+    # Load the scoring rubrics and weights for each test case
     test_config = json.load(open(args.test_config, "r"))
 
     results_by_src = dict()
     qn_by_case = dict()
+
+    # Evaluate each system under consideration for its responses to each test case
     for src, responses in sys_responses.items():
         llm_eval = LlmEval(test_config, responses, args.rubrics, args.snippets)
         print()
@@ -179,9 +192,12 @@ def main():
             skip_duplicate_annotations=(not args.agreement)
         )
         print(f"Created {len(test_cases)} tests for src: {src}...")
+
         for test_case in test_cases:
             qn_by_case[test_case.case_id] = test_case.initial_prompt
         results_by_src[src] = []
+
+        # Evaluate all the test cases in parallel
         print(f"Running test cases for src: {src}...")
         with ThreadPoolExecutor(max_workers=32) as executor:
             future_to_test_case = {
@@ -222,7 +238,6 @@ def main():
             ann1, ann2 = [int(x) for x in np.argsort(scores[0]) + 1], [int(x) for x in np.argsort(scores[1]) + 1]
             ktaus.append(np.abs(scipy.stats.kendalltau(ann1, ann2)[0]))
             pcorr.append(np.abs(scipy.stats.pearsonr(ann1, ann2)[0]))
-
 
         print(f"\nAgreement metrics across {len(ktaus)} cases:")
         print(f"   Pearson corr: {round(np.mean(pcorr), 3)}")

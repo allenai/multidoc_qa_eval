@@ -33,6 +33,14 @@ class RubricCorpusQaGenericMetric:
         self.config = CorpusQaRubricConfig.parse_obj(config)
 
     def _score_length(self, response: str, low_length, high_length) -> float:
+        """
+        Score the length of the response. The score is 1 if the length is up to low_length, and decreases
+        with further increase in length, reaching 0 at high_length or more.
+        :param response: the response to be scored
+        :param low_length: defaults to 300
+        :param high_length: default to 600
+        :return: score between 0 and 1 after deducting the penalty for length
+        """
         word_count = len(response.split())
         return 1 - (
                 (max(min(high_length, word_count), low_length) - low_length)
@@ -40,6 +48,15 @@ class RubricCorpusQaGenericMetric:
         )
 
     def _score_property(self, response: str, question: str, prop: str) -> float:
+        """
+        Score the response as per the annotation rubric/criterion represented here by ``prop``.
+        The score is calculated by asking an LLM to judge the response for satisfaction of the rubric/criterion
+        on a scale of 0-10.
+        :param response: the response to be scored
+        :param question: the question for which the response is being scored
+        :param prop: the rubric/criterion to be satisfied
+        :return: score between 0 and 1 after normalizing the LLM score
+        """
         resp = run_chatopenai(
             self.config.model_name,
             system_prompt="""You will be given a question someone asked (in <question></question> tags) and the corresponding response (in <response></response> tags) given to them by an assistant.  You will then be given a specific criterion of the response to evaluate (in <criterion></criterion> tags).
@@ -56,6 +73,13 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
         return obj["score"] / 10.0
 
     def _score_evidence(self, response: str, evidence: List[str]) -> float:
+        """
+        Score the response based on the snippets provided as supporting quotes with the rubric.
+        The score is the fraction of the snippets that are present in the response, as detected by an LLM.
+        :param response: the response to be scored
+        :param evidence: the list of supporting snippets
+        :return: normalized count of snippets present in the response
+        """
         snippets = "\n".join(f"{i + 1}. {x}" for i, x in enumerate(evidence))
         resp = run_chatopenai(
             self.config.model_name,
@@ -86,6 +110,14 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
         return score_components
 
     def _score_citations_excerpts_inner(self, response: str) -> Dict[str, float]:
+        """
+        Score the response for presence of citations and associated excerpts.
+        The response is split into claims with associated citations and excerpts by an LLM.
+        The score is calculated as the fraction of claims that have an associated citation and the fraction of citations
+        that have an associated excerpt.
+        :param response:
+        :return: dict of scores for citations per claim and excerpts per citation
+        """
         resp = run_chatopenai(
             self.config.model_name,
             system_prompt="You are a helpful assistant.",
@@ -117,6 +149,11 @@ Split the response into individual claims, citations, and excerpts from the cita
         return {"citations": citation_score, "excerpts": excerpt_score}
 
     def score_output(self, response: str) -> Dict[str, Any]:
+        """
+        Compute the cumulative weighted score for a system response such that the final score is between 0 and 1.
+        :param response:
+        :return: final weighted score with and without the static components
+        """
         score_weights = {
             "length": self.config.length_weight,
             "expertise": self.config.expertise_weight,
@@ -156,6 +193,7 @@ Split the response into individual claims, citations, and excerpts from the cita
         assert set(score_components.keys()) == set(score_weights.keys())
         score = sum(score_weights[key] * score_components[key] for key in score_weights)
         static_score_keys = {"length", "expertise", "citations", "excerpts"}
+        # Annotation rubrics are 60% of the total score, so divide by 0.6 to get score out of 1 without the static components
         ann_score = sum(
             score_weights[key] * score_components[key] for key in score_weights if key not in static_score_keys) / 0.6
         return {"score": score, "ann_score": ann_score, **score_components}
