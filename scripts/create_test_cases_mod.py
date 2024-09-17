@@ -1,6 +1,6 @@
 import hashlib
 import json
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 from run_utils import extract_json_from_response, run_chatopenai
 from litellm.caching import Cache
 import litellm
@@ -16,23 +16,49 @@ test_cases = []
 
 litellm.cache = Cache(type="disk", disk_cache_dir="./data/litellm_cache/")
 
-def gpt_filter(query: str, ingredients: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+model = 'gpt-4o'
+
+
+def gpt_filter(query: str, ingredients: List[Dict[str, Any]]) -> tuple[
+    list[dict[str, Any]], list[dict[str, Any]]]:
     if not ingredients:
         return ingredients
     context = "\n\n".join([f"{i + 1}. Criterion: {x['text']}\nSupporting quotes: {x['snippets']}" for i, x in enumerate(ingredients)])
+    # system_prompt = f"""You will be given a question someone asked to a scientific assistant (in <question></question> tags).
+    # You will then be provided with a list of criterion numbered from 1 to {len(ingredients)} alon with supporting quotes from publications,
+    # that the response to the question should satisfy in (in <criterion></criterion> tags).
+    # Your job is to filter out the criterion that are not directly relevant to answering the question.
+    # Output the required criterion index/ordinal as a JSON: {{"criterion": [1, 2, 4,...]}}."""
+
     system_prompt = f"""You will be given a question someone asked to a scientific assistant (in <question></question> tags).
-    You will then be provided with a list of criterion numbered from 1 to {len(ingredients)} alon with supporting quotes from publications, 
-    that the response to the question should satisfy in (in <criterion></criterion> tags).
-    Your job is to filter out the criterion that are not directly relevant to answering the question.
-    Output the required criterion index/ordinal as a JSON: {{"criterion": [1, 2, 4,...]}}."""
+    You will then be provided with a list of criterion numbered from 1 to {len(ingredients)} along with supporting quotes from publications,
+    that the response to the question should satisfy in (in <criterion></criterion> tags). Assume the person posing the question already has all the background knowledge they need.
+    Your job is to:
+    A: Label each criteria accourding to the role it play sin the answer. Limit the labels to "background", "actual answer", "elaboration", and "other".
+    B: Say how important each criteria is on a scale of 1-5 where 5 is critical need.
+    Output a JSON: {{"criteria": [{{"criterion": <criterion index>, "label": <label>, "importance": <level of criterion importance>}},{{...}}]}}."""
+
     user_prompt = f"""<question>{query}</question>\n<criterion>{context}</criterion>"""
-    resp = run_chatopenai("gpt-4-turbo", system_prompt, user_prompt, json_mode=True)
+
+    resp = run_chatopenai(model, system_prompt, user_prompt, json_mode=True)
     obj = extract_json_from_response(resp)
     if not obj:
         return ingredients
-    obj["criterion"].sort()
-    return [ingredients[i - 1] for i in obj["criterion"] if 0 <= (i - 1) < len(ingredients)]
+    # obj = []
 
+    print(obj)
+
+    most = []
+    nth = []
+    for c in obj["criteria"]:
+        this_score = c["importance"] - 1 if c["label"] == "background" else c["importance"] # if background, dock 1
+        ingredient = ingredients[c["criterion"]-1]
+        if this_score > 3:
+            most.append(ingredient)
+        else:
+            nth.append(ingredient)
+
+    return most, nth
 
 for d in tqdm(annotations):
     qn = {
@@ -57,8 +83,7 @@ for d in tqdm(annotations):
         .hex(),
     }
 
-    d["ingredients"]["most_important"] = gpt_filter(d["question"], d["ingredients"]["most_important"])
-    d["ingredients"]["nice_to_have"] = gpt_filter(d["question"], d["ingredients"]["nice_to_have"])
+    d["ingredients"]["most_important"], d["ingredients"]["nice_to_have"] = gpt_filter(d["question"], d["ingredients"]["most_important"])
 
     if (
             len(d["ingredients"]["nice_to_have"]) != 0
@@ -101,5 +126,5 @@ for d in tqdm(annotations):
     qn["agreement"] = d["agreement"]
     test_cases.append(qn)
 
-with open("data/test_configs_snippets_gpt.json", "w") as f:
+with open(f"data/jena/test_configs_snippets_{model}-detailed.json", "w") as f:
     json.dump(test_cases, f, indent=2)
