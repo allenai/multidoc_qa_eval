@@ -16,6 +16,8 @@ test_cases = []
 
 litellm.cache = Cache(type="disk", disk_cache_dir="./data/litellm_cache/")
 
+model = 'gpt-4o'
+
 
 def gpt_filter(query: str, ingredients: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     if not ingredients:
@@ -27,7 +29,7 @@ def gpt_filter(query: str, ingredients: List[Dict[str, Any]]) -> List[Dict[str, 
     Your job is to filter out the criterion that are not directly relevant to answering the question.
     Output the required criterion index/ordinal as a JSON: {{"criterion": [1, 2, 4,...]}}."""
     user_prompt = f"""<question>{query}</question>\n<criterion>{context}</criterion>"""
-    resp = run_chatopenai("gpt-4-turbo", system_prompt, user_prompt, json_mode=True)
+    resp = run_chatopenai(model, system_prompt, user_prompt, json_mode=True)
     obj = extract_json_from_response(resp)
     if not obj:
         return ingredients
@@ -59,7 +61,7 @@ for d in tqdm(annotations):
     }
 
     d["ingredients"]["most_important"] = gpt_filter(d["question"], d["ingredients"]["most_important"])
-    d["ingredients"]["nice_to_have"] = gpt_filter(d["question"], d["ingredients"]["nice_to_have"])
+    #d["ingredients"]["nice_to_have"] = gpt_filter(d["question"], d["ingredients"]["nice_to_have"])
 
     if (
             len(d["ingredients"]["nice_to_have"]) != 0
@@ -102,5 +104,5 @@ for d in tqdm(annotations):
     qn["agreement"] = d["agreement"]
     test_cases.append(qn)
 
-with open("data/test_configs_snippets_gpt.json", "w") as f:
+with open("data/jena/test_configs_snippets_gpt.json", "w") as f:
     json.dump(test_cases, f, indent=2)
