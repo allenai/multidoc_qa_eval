@@ -186,7 +186,6 @@ def main():
     # Evaluate each system under consideration for its responses to each test case
     for src, responses in sys_responses.items():
         llm_eval = LlmEval(test_config, responses, args.rubrics, args.snippets)
-        print()
         print(f"Creating test cases for src: {src}...")
         test_cases = llm_eval.make_test_cases(
             skip_duplicate_annotations=(not args.agreement)
@@ -230,18 +229,21 @@ def main():
                     if res["question"] not in qn_results:
                         qn_results[res["question"]] = [[], []]
                     if res["annotator"] == "Annotator 1 Assignments":
-                        qn_results[res["question"]][0].append(-res["scores"]["ann_score"])
+                        qn_results[res["question"]][0].append(res["scores"]["ann_score"])
                     else:
-                        qn_results[res["question"]][1].append(-res["scores"]["ann_score"])
+                        qn_results[res["question"]][1].append(res["scores"]["ann_score"])
         ktaus, pcorr = [], []
         for qn, scores in qn_results.items():
-            ann1, ann2 = [int(x) for x in np.argsort(scores[0]) + 1], [int(x) for x in np.argsort(scores[1]) + 1]
-            ktaus.append(np.abs(scipy.stats.kendalltau(ann1, ann2)[0]))
-            pcorr.append(np.abs(scipy.stats.pearsonr(ann1, ann2)[0]))
-
+            ann1, ann2 = [x for x in scores[0]], [x for x in scores[1]]
+            if len(set(ann1)) ==1 or len(set(ann2)) == 1:
+                ktaus.append(0.0)
+                pcorr.append(0.0)
+            else:
+                ktaus.append(np.abs(scipy.stats.kendalltau(ann1, ann2)[0]))
+                pcorr.append(np.abs(scipy.stats.pearsonr(ann1, ann2)[0]))
         print(f"\nAgreement metrics across {len(ktaus)} cases:")
         print(f"   Pearson corr: {round(np.mean(pcorr), 3)}")
-        print(f"    Kendall tau: {round(np.mean(ktaus), 3)}")
+        print(f"   Kendall tau: {round(np.mean(ktaus), 3)}")
 
 
 if __name__ == "__main__":
