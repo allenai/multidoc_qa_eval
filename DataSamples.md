@@ -55,7 +55,7 @@ Field descriptions:
 - **expertise_weight**: LLM alloted score for whether the response is expertise appropriate per the query. It accounts for 5% of the score.
 - **citations_weight** and excerpts_weight: Each claim should be attributed with a citation and the citation should have excerpts for verification. They each account for 20% and 10% of the score respectively.
 - **other_properties**: 60% of the score is alloted based on human annotated rubric ingredients, i.e. criterion that a good answer to the query should meet.
-- **most_important_item_x**: Critical ingredient to answer the query. The most important ingredients are weighed 2X compared to nice to have ingredients (described below). The associated human annotated evidence is used for scoring as well.
+- **most_important_item_x**: Critical ingredient or criteria necessary to answer the query. The most important ingredients are weighed 2X compared to nice to have ingredients (described below). The associated human annotated evidence is used for scoring as well.
 - **nice_to_have_item_x**: Helpful information that adds valuable context to the response.
 - **case_id**: Unique id for the test case
 - **annotator**: annotator id
