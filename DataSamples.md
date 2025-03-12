@@ -1,5 +1,5 @@
 ### Test Case Sample
-[all test cases](https://github.com/allenai/multidoc_qa_eval/blob/main/data/test_configs_snippets.json)
+[All Test cases](https://github.com/allenai/multidoc_qa_eval/blob/main/data/test_configs_snippets.json)
 
 ```json
   {
