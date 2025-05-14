@@ -25,7 +25,7 @@ class CorpusQaRubricConfig(BaseModel):
     citations_weight: float = 0.2
     excerpts_weight: float = 0.1
     other_properties: List[CorpusQaRubricPropertyConfig] = Field(default_factory=list)
-    model_name: str = "gpt-4-turbo"
+    model_name: str = "gpt-4o"
 
 
 class RubricCorpusQaGenericMetric:
