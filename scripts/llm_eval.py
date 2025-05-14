@@ -47,11 +47,12 @@ class TestCase(BaseModel):
 
 class LlmEval:
     def __init__(self, test_config: List[Dict[str, Any]], responses: Dict[str, str], use_rubrics: bool,
-                 use_snippets: bool):
+                 use_snippets: bool, judge_model: str):
         self.test_configs = test_config
         self.responses = responses
         self.use_snippets = use_snippets
         self.use_rubrics = use_rubrics
+        self.judge_model = judge_model
 
     def make_test_cases(
             self, skip_duplicate_annotations: bool = True
@@ -78,6 +79,7 @@ class LlmEval:
             ):
                 continue
             seen_agreements.add(conf["initial_prompt"])
+            conf["metric_config"]["config"]["model_name"] = self.judge_model
             test_cases.append(TestCase(**conf))
         return test_cases
 
@@ -161,6 +163,12 @@ def main():
         help="names of the source files to evaluate (comma separated with .jsonl extension)",
         default=None,
     )
+    parser.add_argument(
+        "--judge-model",
+        type=str,
+        default="gpt-4o",
+        help="Model to use for judging the responses",
+    )
 
     args = parser.parse_args()
 
@@ -185,12 +193,16 @@ def main():
 
     # Evaluate each system under consideration for its responses to each test case
     for src, responses in sys_responses.items():
-        llm_eval = LlmEval(test_config, responses, args.rubrics, args.snippets)
+        llm_eval = LlmEval(test_config, responses, args.rubrics, args.snippets, args.judge_model)
         print(f"Creating test cases for src: {src}...")
         test_cases = llm_eval.make_test_cases(
             skip_duplicate_annotations=(not args.agreement)
         )
         print(f"Created {len(test_cases)} tests for src: {src}...")
+        print("General metric config:")
+        for key, value in test_cases[0].metric_config["config"].items():
+            if key not in ["question", "other_properties"]:
+                print(f"   {key}: {value}")
 
         for test_case in test_cases:
             qn_by_case[test_case.case_id] = test_case.initial_prompt
