@@ -46,13 +46,20 @@ class TestCase(BaseModel):
 
 
 class LlmEval:
-    def __init__(self, test_config: List[Dict[str, Any]], responses: Dict[str, str], use_rubrics: bool,
-                 use_snippets: bool, judge_model: str):
+    def __init__(self,
+                 test_config: List[Dict[str, Any]],
+                 responses: Dict[str, str],
+                 use_rubrics: bool,
+                 use_snippets: bool,
+                 judge_model: str,
+                 temperature: float
+    ):
         self.test_configs = test_config
         self.responses = responses
         self.use_snippets = use_snippets
         self.use_rubrics = use_rubrics
         self.judge_model = judge_model
+        self.temperature = temperature
 
     def make_test_cases(
             self, skip_duplicate_annotations: bool = True
@@ -80,6 +87,7 @@ class LlmEval:
                 continue
             seen_agreements.add(conf["initial_prompt"])
             conf["metric_config"]["config"]["model_name"] = self.judge_model
+            conf["metric_config"]["config"]["temperature"] = self.temperature
             test_cases.append(TestCase(**conf))
         return test_cases
 
@@ -169,6 +177,12 @@ def main():
         default="gpt-4o",
         help="Model to use for judging the responses",
     )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=0.0,
+        help="Temperature to use for the judge model",
+    )
 
     args = parser.parse_args()
 
@@ -193,7 +207,7 @@ def main():
 
     # Evaluate each system under consideration for its responses to each test case
     for src, responses in sys_responses.items():
-        llm_eval = LlmEval(test_config, responses, args.rubrics, args.snippets, args.judge_model)
+        llm_eval = LlmEval(test_config, responses, args.rubrics, args.snippets, args.judge_model, args.temperature)
         print(f"Creating test cases for src: {src}...")
         test_cases = llm_eval.make_test_cases(
             skip_duplicate_annotations=(not args.agreement)

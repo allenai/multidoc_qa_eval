@@ -26,6 +26,7 @@ class CorpusQaRubricConfig(BaseModel):
     excerpts_weight: float = 0.1
     other_properties: List[CorpusQaRubricPropertyConfig] = Field(default_factory=list)
     model_name: str = "gpt-4o"
+    temperature: float = 0.0
 
 
 class RubricCorpusQaGenericMetric:
@@ -64,6 +65,7 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
             user_prompt=f"""<question>{question}</question>\n<response>{response}</response>\n<criterion>{prop}</criterion>""",
             json_mode=True,
             max_tokens=100,
+            temperature=self.config.temperature,
         )
 
         obj = extract_json_from_response(resp)
@@ -91,7 +93,7 @@ Return a score on a scale of 0 to 10 indicating how appropriate the response is 
             user_prompt=f"""<response>{response}</response>\n<snippets>{snippets}</snippets>""",
             json_mode=True,
             max_tokens=100,
-
+            temperature=self.config.temperature,
         )
 
         obj = extract_json_from_response(resp)
@@ -128,6 +130,7 @@ Split the response into individual claims, citations, and excerpts from the cita
                         '{"claims": [{"claim_text": "...", "citations": [{"citation_text": "...", "excerpts": ["...", ...]}, ...]}, ...]}'
                         "\n\nIf a claim is missing citations or a citation is not accompanied by excerpts, some lists may be empty in your output.",
             json_mode=True,
+            temperature=self.config.temperature,
         )
 
         extracted_json = extract_json_from_response(resp)
